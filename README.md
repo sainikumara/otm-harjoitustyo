@@ -8,4 +8,4 @@
 
 * [gitlog.txt](https://github.com/sainikumara/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
 
-**Readmessa** on nyt _tekstiä_.
+
