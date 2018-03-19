@@ -1,0 +1,117 @@
+commit f7b2092609dc5c155f53526292935bc8bd890756
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:48:01 2018 +0200
+
+    tiedostoharjoittelua
+
+ tiedostoja/file1  | 0
+ tiedostoja/file2  | 0
+ tiedostoja/file22 | 0
+ tiedostoja/file3  | 2 ++
+ 4 files changed, 2 insertions(+)
+
+commit 39845cddfef2fe7ac280a54a241766ac09018acf
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:44:29 2018 +0200
+
+    tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit f6daf40c344bf5a7ba3f90c60a1ed8b60b086073
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:39:10 2018 +0200
+
+    treenataan git add -p
+
+ eka.txt    | 6 ++----
+ kolmas.txt | 2 +-
+ 2 files changed, 3 insertions(+), 5 deletions(-)
+
+commit ac6c51bbf7ddcfbd6ce58b202501fc2a11322ba1
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:31:57 2018 +0200
+
+    uudelleennimettiin tiedosto.txt -> eka.txt
+
+ eka.txt      | 30 ++++++++++++++++++++++++++++++
+ tiedosto.txt | 30 ------------------------------
+ 2 files changed, 30 insertions(+), 30 deletions(-)
+
+commit cbbcdae19da22416850bdbc83bc7bcf676857cc6
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:29:10 2018 +0200
+
+    poistettiin toinen.txt
+
+ toinen.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+commit f8909d96084e475b9c81d8d3b5e593434f611874
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:25:42 2018 +0200
+
+    poistettiin ja lisättiin taas vähän tekstiä
+
+ tiedosto.txt | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 401ac4a3aaa8cfc2b51ddf230a614700ba9d0c0b
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:24:31 2018 +0200
+
+    lisättiin tiedostoon paljon tekstiä
+
+ tiedosto.txt | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+commit d16da8df2e5becde9ca8362dcd7f6d20a003f497
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:19:04 2018 +0200
+
+    stuff lisätty
+
+ stuff/jokin.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit f739c57d38cbb20389244a5f845959008b84553f
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:15:37 2018 +0200
+
+    muutos kakkoseen ja kolmoseen
+
+ kolmas.txt | 2 +-
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+commit f1f58f015e6c91966b04888d9cecb301bead835e
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:14:16 2018 +0200
+
+    kolmonen lisätty
+
+ kolmas.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 76a7805b172648feb8d6737559a18309a504530e
+Author: Saini Kumara <saini@iki.fi>
+Date:   Mon Mar 19 15:07:05 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 470304ae8a4078a76586352ff95efe2116336cc7
+Author: Saini Kumara <saini@iki.fi>
+Date:   Thu Mar 15 10:07:23 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
