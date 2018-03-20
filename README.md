@@ -9,3 +9,4 @@
 * [gitlog.txt](https://github.com/sainikumara/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
 
 
+Paikallinen muutos
