@@ -1,5 +1,10 @@
 # OTM-harjoitustyö
 
+## worksheetout
+Treenien seurannan helpottamista varten rakennettu yksinkertainen sovellus.
+
+### Dokumentaatio
+
 [tuntikirjanpito](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/tuntikirjanpito.md)
 
 ## Tehtävät
