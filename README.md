@@ -1,5 +1,7 @@
 # OTM-harjoitustyö
 
+[tuntikirjanpito](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/tuntikirjanpito.md)
+
 ## Tehtävät
 
 ### Viikko 1
