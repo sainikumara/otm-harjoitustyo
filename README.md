@@ -8,5 +8,6 @@
 
 * [gitlog.txt](https://github.com/sainikumara/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
 
+### Viikko 2
 
-Paikallinen muutos
+* [testauskattavuus.png](https://github.com/sainikumara/otm-harjoitustyo/blob/master/laskarit/viikko2/testauskattavuus.png)
