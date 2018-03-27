@@ -2,7 +2,7 @@
 
 ## Soveluksen tarkoitus
 
-Sovelluksen avulla käyttäjien on mahdollista pitää kirjaa harjoittelustaan ja seurata edistymistään. Sovellusta on mahdollista käyttää useamman rekisteröityneen käyttäjän, jotka voivat luoda omat harjoitusohjelmansa ja muokata niitä.
+Sovelluksen avulla käyttäjien on mahdollista pitää kirjaa harjoittelustaan ja seurata edistymistään kvantitatiivisesti. Sovellusta on mahdollista käyttää useamman rekisteröityneen käyttäjän, jotka voivat luoda omat harjoitusohjelmansa ja muokata niitä.
 
 
 ## Käyttäjät
