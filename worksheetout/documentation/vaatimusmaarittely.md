@@ -1,12 +1,17 @@
 # Vaatimusmäärittely
 
 ## Soveluksen tarkoitus
+
 Sovelluksen avulla käyttäjien on mahdollista pitää kirjaa harjoittelustaan ja seurata edistymistään. Sovellusta on mahdollista käyttää useamman rekisteröityneen käyttäjän, jotka voivat luoda omat harjoitusohjelmansa ja muokata niitä.
 
+
 ## Käyttäjät
+
 Sovelluksella on vain peruskäyttäjiä.
 
+
 ## Käyttöliittymäluonnos
+
 
 ## Perusversion tarjoama toiminnallisuus
 
@@ -14,6 +19,7 @@ Sovelluksella on vain peruskäyttäjiä.
 
 - Käyttäjä voi kirjautua sovellukseen Google-tunnuksillaan
   - [Google OAuth 2.0](https://developers.google.com/api-client-library/java/google-api-java-client/oauth2)
+  
   
 ### Kirjautumisen jälkeen
 
@@ -28,11 +34,17 @@ Sovelluksella on vain peruskäyttäjiä.
   - harjoituskerroilla on päivämäärä
   - käyttäjä merkkaa tekemänsä yksittäiset harjoitukset antamalla arvot sen kenttiin
   
-- Käyttäjä voi selata vanhoja harjoituskertojaan
+- Käyttäjä voi selata vanhojen harjoituskertojensa tietoja
   
 - Käyttäjä voi kirjautua ulos sovelluksesta
 
+
 ## Jatkokehitysideoita
 
-- Yhteenvetotietoja harjoittelun edistymisestä esim. viikoittain, kuukausittain, harjoituksittain
-- Graafisia yhteenvetotietoja harjoittelun edistymisestä
+- Ensimmäisessä versiossa tiedot talletetaan paikallisesti tiedostoon, mutta sovelluksen on tarkoitus siirtyä käyttämään tallennusmuotonaan [Google Sheetsia](https://developers.google.com/api-client-library/java/apis/sheets/v4)
+- Käyttäjällä pääsy Sheetsissa olevaan dataan ja mahdollisuus käyttää sitä mielensä mukaan esim. harjoittelun analyysointiin
+- Sovelluksessa näytetään yhteenvetotietoja harjoittelun edistymisestä esim. viikoittain, kuukausittain, harjoituksittain
+- Sovelluksessa näytetään graafisia yhteenvetotietoja harjoittelun edistymisestä
+- Yksityiskohtaisempi harjoituksen merkkaus: esim. sarjojen lukumäärä ja kunkin sarjan toistojen lukumäärä
+- Harjoitusohjelmien rakentaminen, yhdistäminen kalenteriin
+- Käyttäjä voi sallia sovelluksessa näytettävän säätietoja, ja voi valita yhdistää säädataa harjoitteludataansa 
