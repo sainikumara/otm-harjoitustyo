@@ -25,14 +25,16 @@ Sovelluksella on vain peruskäyttäjiä.
 
 - Käyttäjä näkee ensimmäisellä kirjautumiskerralla alkunäkymässä linkit kolmeen valmiiseen harjoituskokonaisuuspohjaan
   - käyttäjä voi tarkastella ja muokata valmiita pohjia tai luoda uusia harjoituskokonaisuuksia
+  - käyttäjä voi poistaa harjoituskokonaisuuksia
   
-- Käyttäjä voi luoda uusia harjoituksia
+- Käyttäjä voi luoda uusia harjoituksia ja poistaa vanhoja
   - harjoituksella on nimi ja tieto siitä, mihin harjoituskokonaisuuteen se kuuluu
   - harjoitukselle määritellään kaksi numeroarvoista kenttää; oletusarvoisesti harjoitusvastus ja toistojen lukumäärä
   
 - Käyttäjä voi luoda harjoituskertoja harjoituskokonaisuuksille
   - harjoituskerroilla on päivämäärä
   - käyttäjä merkkaa tekemänsä yksittäiset harjoitukset antamalla arvot sen kenttiin
+  - käyttäjä voi poistaa harjoituskertoja
   
 - Käyttäjä voi selata vanhojen harjoituskertojensa tietoja
   
