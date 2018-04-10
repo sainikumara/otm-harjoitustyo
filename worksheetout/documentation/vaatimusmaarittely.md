@@ -28,8 +28,9 @@ Sovelluksella on vain peruskäyttäjiä.
   - käyttäjä voi poistaa harjoituskokonaisuuksia
   
 - Käyttäjä voi luoda uusia harjoituksia ja poistaa vanhoja
-  - harjoituksella on nimi ja tieto siitä, mihin harjoituskokonaisuuteen se kuuluu
+  - harjoituksella on nimi
   - harjoitukselle määritellään kaksi numeroarvoista kenttää; oletusarvoisesti harjoitusvastus ja toistojen lukumäärä
+  - harjoituksen voi lisätä harjoituskokonaisuuteen
   
 - Käyttäjä voi luoda harjoituskertoja harjoituskokonaisuuksille
   - harjoituskerroilla on päivämäärä
