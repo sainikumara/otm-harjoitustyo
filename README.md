@@ -11,6 +11,12 @@ Treenien seurannan helpottamista varten rakennettu yksinkertainen sovellus.
 
 ## Komentorivitoiminnot
 
+### Ohjelman suorittaminen
+Ohjelman voi suorittaa hakemistossa worksheetout komennolla
+```
+mvn compile exec:java -Dexec.mainClass=worksheetout.ui.TestUI
+```
+
 ### Testaus
 
 Testit suoritetaan komennolla
