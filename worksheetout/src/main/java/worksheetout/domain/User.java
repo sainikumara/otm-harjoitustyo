@@ -19,7 +19,7 @@ public class User {
 
     public String getUsername() {
         return username;
-    }    
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -30,7 +30,6 @@ public class User {
         User other = (User) obj;
         return username.equals(other.username);
     }
-    
     
     @Override
     public String toString() {
