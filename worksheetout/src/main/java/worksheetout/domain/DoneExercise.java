@@ -42,7 +42,7 @@ public class DoneExercise extends Exercise {
     
     public int getParameterValue(String parameterName) {
         return this.parameterValues.getOrDefault(parameterName, -1);
-     }
+    }
     
     
     public Map<String, Integer> getParameterValues() {

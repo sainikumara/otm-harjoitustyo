@@ -35,7 +35,7 @@ public class TestUI {
         
         System.out.println("Next, add the exercises you want to add to this routine");
         
-        while(true) {
+        while (true) {
             System.out.print("exercise name: ");
             String exerciseName = reader.nextLine();
             System.out.print("first parameter (eg. kg, speed): ");
@@ -95,7 +95,7 @@ public class TestUI {
             
             System.out.println("Your exercises are now saved in the file " + file);
         } catch (Exception e) {
-            System.out.println("Something went wrong with saving your exercises to a file.");
+            System.out.println("Something went wrong with saving your exercises to a file: " + e.getMessage());
         }   
     }
     
