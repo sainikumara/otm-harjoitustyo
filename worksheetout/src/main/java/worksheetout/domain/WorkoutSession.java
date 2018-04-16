@@ -1,7 +1,9 @@
 package worksheetout.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,21 +16,43 @@ public class WorkoutSession {
     private User user;
     private Date date;
     private Routine routine;
-    private Map<String, DoneExercise> sessionContents;
+    private List<DoneExercise> sessionContents;
 
-    public WorkoutSession(int id, User newUser, Date newDate, Routine newRoutine) {
+    public WorkoutSession(int id, Date newDate, Routine newRoutine) {
         this.id = id;
-        this.user = newUser;
+        this.user = newRoutine.getUser();
         this.date = newDate;
         this.routine = newRoutine;
-        this.sessionContents = new HashMap<>();
+        this.sessionContents = new ArrayList<>();
     }
     
-    public WorkoutSession(User newUser, Date newDate, Routine newRoutine) {;
-        this.user = newUser;
+    public WorkoutSession(Date newDate, Routine newRoutine) {
+        this.user = newRoutine.getUser();
         this.date = newDate;
         this.routine = newRoutine;
-        this.sessionContents = new HashMap<>();
+        this.sessionContents = new ArrayList<>();
+    }
+    
+    public Routine getRoutine() {
+        return this.routine;
+    }
+    
+    public void setRoutine(Routine newRoutine) {
+        this.routine = newRoutine;
+    }
+    
+    public List<DoneExercise> getSessionContents() {
+        return this.sessionContents;
+    }
+    
+    public void setSessionContents(List<DoneExercise> newContents) {
+        this.sessionContents = newContents;
+    }
+    
+    public void addOneDoneExercise(String name, List<Integer> parameterValues) {
+        Exercise exercise = this.routine.getOneExercise(name);
+        DoneExercise doneExercise = new DoneExercise(exercise, parameterValues);
+        this.sessionContents.add(doneExercise);
     }
     
     public void setId(int newId) {
@@ -58,6 +82,17 @@ public class WorkoutSession {
         }
         WorkoutSession other = (WorkoutSession) obj;
         return id == other.id;
+    }
+    
+    @Override
+    public String toString() {
+        String sessionAsAString = this.date.toString() + ": \n";
+        
+        for (DoneExercise exercise : this.sessionContents) {
+            sessionAsAString += exercise.toString() + "\n";
+        }
+        
+        return sessionAsAString;
     }
 
 }

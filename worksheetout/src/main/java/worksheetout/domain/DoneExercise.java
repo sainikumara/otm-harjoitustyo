@@ -28,6 +28,14 @@ public class DoneExercise extends Exercise {
         }
     }
     
+    public DoneExercise(Exercise exercise, List<Integer> values) {
+        super(exercise.getName(), exercise.getUser(), exercise.getParameters().get(0), exercise.getParameters().get(1));
+        
+        for (int i = 0; i < super.getParameters().size(); i++) {
+            this.parameterValues.put(super.getParameters().get(i), values.get(i));
+        }
+    }
+    
     public void setParameterValue(String parameterName, int value) {
         this.parameterValues.put(parameterName, value);
     }

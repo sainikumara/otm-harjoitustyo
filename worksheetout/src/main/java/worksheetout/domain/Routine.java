@@ -58,6 +58,11 @@ public class Routine {
     public void addOneExercise(Exercise newExercise) {
         this.exercises.add(newExercise);
     }
+    
+    public Exercise getOneExercise(String name) {
+        Exercise exerciseToFind = new Exercise(name, this.user);
+        return this.exercises.get(this.exercises.indexOf(exerciseToFind));
+    }
 
     @Override
     public boolean equals(Object obj) {

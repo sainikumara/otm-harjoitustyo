@@ -10,6 +10,9 @@ import worksheetout.domain.User;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TestUI {
     
@@ -25,7 +28,7 @@ public class TestUI {
         String username = reader.nextLine();
         User user = new User(username, name);
         
-        System.out.println("\nWelcome, " + username + "! Now, let's get started with your first workout routine.");
+        System.out.println("\nWelcome, " + name + "! Now, let's get started with your first workout routine.");
         System.out.print("Please give a name for the routine: ");
         String routineName = reader.nextLine();
         Routine firstRoutine = new Routine(routineName, user);
@@ -56,10 +59,22 @@ public class TestUI {
         
         System.out.println("Let's hit the gym!");
         
-        List<DoneExercise> doneExercises = new ArrayList<>();
+        System.out.print("What day is it? (use format 'yyyy-MM-dd') ");
+        String dateAsString = reader.nextLine();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        for (Exercise exercise : firstRoutine.getExercises()) {
-            List<Integer> parameterValues = new ArrayList<>();
+        Date date = new Date();
+        
+        try {
+            date = dateFormat.parse(dateAsString);
+        } catch (Exception e) {
+            System.out.println("There was an error parsing the date: " + e.getMessage());
+        }
+        
+        WorkoutSession workoutSession = new WorkoutSession(date, firstRoutine);
+                
+        for (Exercise exercise : workoutSession.getRoutine().getExercises()) {
+            List<Integer> parameterValues = new ArrayList<>();           
             
             System.out.print(exercise.getName() + ", " + exercise.getParameters().get(0) + ": ");
             int parameter1Value = Integer.parseInt(reader.nextLine());
@@ -68,17 +83,16 @@ public class TestUI {
             int parameter2Value = Integer.parseInt(reader.nextLine());
             parameterValues.add(parameter2Value);
             
-            DoneExercise doneExercise = new DoneExercise(exercise.getName(), user, exercise.getParameters(), parameterValues);
-            doneExercises.add(doneExercise);
+            workoutSession.addOneDoneExercise(exercise.getName(), parameterValues);
             
-            System.out.println(doneExercise);
         }
+        
+        System.out.println(workoutSession.toString());
         
         try (FileWriter writer = new FileWriter(new File(file))) {
             writer.write(user.getUsername() + ", " + firstRoutine.getName() + ":\n");
-            for (DoneExercise doneExercise : doneExercises) {
-                writer.write(doneExercise.toString() + "\n");
-            }
+            writer.write(workoutSession.toString());
+            
             System.out.println("Your exercises are now saved in the file " + file);
         } catch (Exception e) {
             System.out.println("Something went wrong with saving your exercises to a file.");

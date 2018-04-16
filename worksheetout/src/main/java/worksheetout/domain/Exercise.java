@@ -75,7 +75,7 @@ public class Exercise {
             return false;
         }
         Exercise other = (Exercise) obj;
-        return this.id == other.id;
+        return this.name.equals(other.name);
     }
     
     @Override
