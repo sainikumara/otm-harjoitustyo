@@ -11,43 +11,43 @@ import static org.junit.Assert.*;
 
 public class ExerciseTest {
     User u1;
-    Exercise excerciseNoIdNoParameters;
-    Exercise excerciseIdNoParameters;
-    Exercise excerciseNoIdParameters;
-    Exercise excerciseIdParameters;
+    Exercise exerciseNoIdNoParameters;
+    Exercise exerciseIdNoParameters;
+    Exercise exerciseNoIdParameters;
+    Exercise exerciseIdParameters;
     
     @Before
     public void setUp() {
         u1 = new User("tester", "Terttu");
-        excerciseNoIdNoParameters = new Exercise("squat", u1);
-        excerciseIdNoParameters = new Exercise(1, "deadlift", u1);
-        excerciseNoIdParameters = new Exercise("calf raise", u1, "kg", "repetitions");
-        excerciseIdParameters = new Exercise(2, "legpress", u1, "kg", "repetitions");
+        exerciseNoIdNoParameters = new Exercise("squat", u1);
+        exerciseIdNoParameters = new Exercise(1, "deadlift", u1);
+        exerciseNoIdParameters = new Exercise("calf raise", u1, "kg", "repetitions");
+        exerciseIdParameters = new Exercise(2, "legpress", u1, "kg", "repetitions");
     }
     
     @Test
     public void nameIsCorrect() {
-        assertTrue(excerciseNoIdNoParameters.getName().equals("squat"));
-        assertTrue(excerciseIdNoParameters.getName().equals("deadlift"));
-        assertTrue(excerciseNoIdParameters.getName().equals("calf raise"));
-        assertTrue(excerciseIdParameters.getName().equals("legpress"));
+        assertTrue(exerciseNoIdNoParameters.getName().equals("squat"));
+        assertTrue(exerciseIdNoParameters.getName().equals("deadlift"));
+        assertTrue(exerciseNoIdParameters.getName().equals("calf raise"));
+        assertTrue(exerciseIdParameters.getName().equals("legpress"));
     }
     
     @Test
     public void setNameWorks() {
-        excerciseNoIdNoParameters.setName("squat with weights");
-        assertTrue(excerciseNoIdNoParameters.getName().equals("squat with weights"));
+        exerciseNoIdNoParameters.setName("squat with weights");
+        assertTrue(exerciseNoIdNoParameters.getName().equals("squat with weights"));
     }
     
     @Test
     public void idIsCorrect() {
-        assertTrue(excerciseIdParameters.getId() == 2);
+        assertTrue(exerciseIdParameters.getId() == 2);
     }
     
     @Test
     public void setIdWorks() {
-        excerciseNoIdNoParameters.setId(3);
-        assertTrue(excerciseNoIdNoParameters.getId() == 3);
+        exerciseNoIdNoParameters.setId(3);
+        assertTrue(exerciseNoIdNoParameters.getId() == 3);
     }
     
     @Test
@@ -55,43 +55,43 @@ public class ExerciseTest {
         List<String> parameters = new ArrayList<>();
         parameters.add("kg");
         parameters.add("repetitions");
-        assertTrue(excerciseIdParameters.getParameters().equals(parameters));
+        assertTrue(exerciseIdParameters.getParameters().equals(parameters));
     }
     
     @Test
     public void setParametersWorks() {
-        excerciseNoIdNoParameters.setParameters("kg", "repetitions");
+        exerciseNoIdNoParameters.setParameters("kg", "repetitions");
         List<String> parameters = new ArrayList<>();
         parameters.add("kg");
         parameters.add("repetitions");
-        assertTrue(excerciseNoIdNoParameters.getParameters().equals(parameters));
+        assertTrue(exerciseNoIdNoParameters.getParameters().equals(parameters));
     }
     
     @Test
     public void userIsCorrect() {
-        assertTrue(excerciseNoIdNoParameters.getUser().equals(u1));
+        assertTrue(exerciseNoIdNoParameters.getUser().equals(u1));
     }
     
     @Test
     public void equalWhenSameName() {
         Exercise e = new Exercise("squat", u1);
-        assertTrue(e.equals(excerciseNoIdNoParameters));
+        assertTrue(e.equals(exerciseNoIdNoParameters));
     }
     
     @Test
     public void nonEqualWhenDifferentUsername() {
         Exercise e = new Exercise("squat", u1);
-        assertFalse(e.equals(excerciseIdNoParameters));
+        assertFalse(e.equals(exerciseIdNoParameters));
     }
     
     @Test
     public void nonEqualWhenDifferentType() {
         Object o = new Object();
-        assertFalse(excerciseIdNoParameters.equals(o));
+        assertFalse(exerciseIdNoParameters.equals(o));
     }
     
     @Test
     public void toStringWorks() {
-        assertTrue(excerciseIdParameters.toString().equals("legpress (parametrit: kg, repetitions)"));
+        assertTrue(exerciseIdParameters.toString().equals("legpress (parametrit: kg, repetitions)"));
     }
 }

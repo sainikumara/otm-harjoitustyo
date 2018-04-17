@@ -12,21 +12,21 @@ public class DoneExercise extends Exercise {
 
     private Map<String, Integer> parameterValues = new HashMap<>();
     
-    public DoneExercise(int newId, String newName, User newUser, List<String> parameterNames, List<Integer> values) {
-        super(newId, newName, newUser);
-        
-        for (int i = 0; i < parameterNames.size(); i++) {
-            this.parameterValues.put(parameterNames.get(i), values.get(i));
-        }
-    }
-    
-    public DoneExercise(String newName, User newUser, List<String> parameterNames, List<Integer> values) {
-        super(newName, newUser);
-        
-        for (int i = 0; i < parameterNames.size(); i++) {
-            this.parameterValues.put(parameterNames.get(i), values.get(i));
-        }
-    }
+//    public DoneExercise(int newId, String newName, User newUser, List<String> parameterNames, List<Integer> values) {
+//        super(newId, newName, newUser);
+//        
+//        for (int i = 0; i < parameterNames.size(); i++) {
+//            this.parameterValues.put(parameterNames.get(i), values.get(i));
+//        }
+//    }
+//    
+//    public DoneExercise(String newName, User newUser, List<String> parameterNames, List<Integer> values) {
+//        super(newName, newUser);
+//        
+//        for (int i = 0; i < parameterNames.size(); i++) {
+//            this.parameterValues.put(parameterNames.get(i), values.get(i));
+//        }
+//    }
     
     public DoneExercise(Exercise exercise, List<Integer> values) {
         super(exercise.getName(), exercise.getUser(), exercise.getParameters().get(0), exercise.getParameters().get(1));
