@@ -1,4 +1,4 @@
-# Työaikakirjanpito
+ # Työaikakirjanpito
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
@@ -6,4 +6,6 @@
 | 27.3. | 2    | Vaatimusmäärittelyn ideointi ja kirjoittaminen |
 | 9.4.  | 2    | Domain-luokkien koodaus |
 | 10.4. | 6    | Domain-luokkien, testikäyttöliittymän ja ensimmäisten testien koodaus |
-| yht   | 11   | | 
+| 16.4. | 5    | Domain -luokkien, testien, ym., koodausta, checkstyle, luokkakaavio |
+| 17.4. | 1    | Testien koodausta |
+| yht   | 17   | | 
