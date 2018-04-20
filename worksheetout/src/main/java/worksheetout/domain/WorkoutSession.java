@@ -13,21 +13,18 @@ import java.util.Map;
 public class WorkoutSession {
 
     private int id;
-    private User user;
     private Date date;
     private Routine routine;
     private List<DoneExercise> sessionContents;
 
     public WorkoutSession(int id, Date newDate, Routine newRoutine) {
         this.id = id;
-        this.user = newRoutine.getUser();
         this.date = newDate;
         this.routine = newRoutine;
         this.sessionContents = new ArrayList<>();
     }
     
     public WorkoutSession(Date newDate, Routine newRoutine) {
-        this.user = newRoutine.getUser();
         this.date = newDate;
         this.routine = newRoutine;
         this.sessionContents = new ArrayList<>();
@@ -61,10 +58,6 @@ public class WorkoutSession {
     
     public void setDate(Date newDate) {
         this.date = newDate;
-    }
-
-    public User getUser() {
-        return this.user;
     }
 
     public int getId() {

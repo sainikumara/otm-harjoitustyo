@@ -43,7 +43,7 @@ public class TestUI {
             System.out.print("second parameter (eg. repetitions, minutes): ");
             String parameter2 = reader.nextLine();
             
-            Exercise exercise = new Exercise(exerciseName, user, parameter1, parameter2);
+            Exercise exercise = new Exercise(exerciseName, parameter1, parameter2);
             firstRoutine.addOneExercise(exercise);
             
             System.out.println("Press enter if you want to add another exercise. Otherwise, type any letter and press enter.");

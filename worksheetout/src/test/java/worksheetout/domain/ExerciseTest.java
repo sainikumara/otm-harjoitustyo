@@ -10,7 +10,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ExerciseTest {
-    User u1;
     Exercise exerciseNoIdNoParameters;
     Exercise exerciseIdNoParameters;
     Exercise exerciseNoIdParameters;
@@ -18,11 +17,10 @@ public class ExerciseTest {
     
     @Before
     public void setUp() {
-        u1 = new User("tester", "Terttu");
-        exerciseNoIdNoParameters = new Exercise("squat", u1);
-        exerciseIdNoParameters = new Exercise(1, "deadlift", u1);
-        exerciseNoIdParameters = new Exercise("calf raise", u1, "kg", "repetitions");
-        exerciseIdParameters = new Exercise(2, "legpress", u1, "kg", "repetitions");
+        exerciseNoIdNoParameters = new Exercise("squat");
+        exerciseIdNoParameters = new Exercise(1, "deadlift");
+        exerciseNoIdParameters = new Exercise("calf raise", "kg", "repetitions");
+        exerciseIdParameters = new Exercise(2, "legpress", "kg", "repetitions");
     }
     
     @Test
@@ -68,19 +66,14 @@ public class ExerciseTest {
     }
     
     @Test
-    public void userIsCorrect() {
-        assertTrue(exerciseNoIdNoParameters.getUser().equals(u1));
-    }
-    
-    @Test
     public void equalWhenSameName() {
-        Exercise e = new Exercise("squat", u1);
+        Exercise e = new Exercise("squat");
         assertTrue(e.equals(exerciseNoIdNoParameters));
     }
     
     @Test
     public void nonEqualWhenDifferentUsername() {
-        Exercise e = new Exercise("squat", u1);
+        Exercise e = new Exercise("squat");
         assertFalse(e.equals(exerciseIdNoParameters));
     }
     

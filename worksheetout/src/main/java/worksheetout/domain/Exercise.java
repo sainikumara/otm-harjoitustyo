@@ -11,31 +11,26 @@ public class Exercise {
 
     private int id;
     private String name;
-    private User user;
     private List<String> parameterNames = new ArrayList<>();
 
-    public Exercise(int id, String newName, User newUser) {
+    public Exercise(int id, String newName) {
         this.id = id;
         this.name = newName;
-        this.user = newUser;
     }
     
-    public Exercise(String newName, User newUser) {
+    public Exercise(String newName) {
         this.name = newName;
-        this.user = newUser;
     }
     
-    public Exercise(int id, String newName, User newUser, String parameter1, String parameter2) {
+    public Exercise(int id, String newName, String parameter1, String parameter2) {
         this.id = id;
         this.name = newName;
-        this.user = newUser;
         this.parameterNames.add(parameter1);
         this.parameterNames.add(parameter2);
     }
     
-    public Exercise(String newName, User newUser, String parameter1, String parameter2) {
+    public Exercise(String newName, String parameter1, String parameter2) {
         this.name = newName;
-        this.user = newUser;
         this.parameterNames.add(parameter1);
         this.parameterNames.add(parameter2);
     }
@@ -55,10 +50,6 @@ public class Exercise {
 
     public String getName() {
         return this.name;
-    }
-
-    public User getUser() {
-        return this.user;
     }
 
     public int getId() {

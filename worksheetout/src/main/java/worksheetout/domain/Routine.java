@@ -60,7 +60,7 @@ public class Routine {
     }
     
     public Exercise getOneExercise(String name) {
-        Exercise exerciseToFind = new Exercise(name, this.user);
+        Exercise exerciseToFind = new Exercise(name);
         return this.exercises.get(this.exercises.indexOf(exerciseToFind));
     }
 

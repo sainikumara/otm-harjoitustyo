@@ -12,15 +12,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DoneExerciseTest {
-    User u1;
     DoneExercise doneExercise;
     Exercise exercise;
     List<Integer> values;
     
     @Before
     public void setUp() {
-        u1 = new User("tester", "Terttu");
-        exercise = new Exercise("calf raise", u1, "kg", "repetitions");
+        exercise = new Exercise("calf raise", "kg", "repetitions");
         values = new ArrayList<>();
         values.add(70);
         values.add(30);
