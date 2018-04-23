@@ -11,6 +11,10 @@ Treenien seurannan helpottamista varten rakennettu yksinkertainen sovellus.
 
 [Työaikakirjanpito](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/tuntikirjanpito.md)
 
+## Releaset
+
+[Viikko 5](https://github.com/sainikumara/otm-harjoitustyo/releases/tag/v0.1-alpha)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
