@@ -48,3 +48,13 @@ mvn package
 ```
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _worksheetout-1.0-SNAPSHOT.jar_
+
+### Checkstyle
+
+Tiedostossa [checkstyle.xml](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/checkstyle.xml) määrittellyt tarkistukset suoritetaan komennolla
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
