@@ -71,6 +71,8 @@ public class TestUI {
             System.out.println("There was an error parsing the date: " + e.getMessage());
         }
         
+        System.out.println("");
+        
         WorkoutSession workoutSession = new WorkoutSession(date, firstRoutine);
                 
         for (Exercise exercise : workoutSession.getRoutine().getExercises()) {
