@@ -1,5 +1,10 @@
 package worksheetout.ui;
 
+import com.google.api.services.sheets.v4.Sheets;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesResponse;
+import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
+import com.google.api.services.sheets.v4.model.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
 import worksheetout.domain.DoneExercise;
@@ -13,14 +18,30 @@ import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import worksheetout.dao.SheetsServiceUtil;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Arrays;
+
 
 public class TestUI {
+    private static Sheets sheetsService;
+    
+    public static void setupSheetService() throws GeneralSecurityException, IOException {
+        sheetsService = SheetsServiceUtil.getSheetsService();
+    }
     
     public static void textUI() {
         Scanner reader = new Scanner(System.in);
         String file = "trainingLog.txt";
         
-        System.out.println("This is the text-based user interface for worksheetout app");
+        try {
+            setupSheetService();
+        } catch (Exception e) {
+            System.out.println("Could not set up Sheets service. Error message: " + e);
+        }
+        
+        System.out.println("\nThis is the text-based user interface for worksheetout app");
         System.out.println("Please choose a name and a username:");
         System.out.print("name: ");
         String name = reader.nextLine();
@@ -72,6 +93,7 @@ public class TestUI {
         }
         
         System.out.println("");
+        System.out.println("Tell about your session in (integer) numbers");
         
         WorkoutSession workoutSession = new WorkoutSession(date, firstRoutine);
                 
@@ -88,54 +110,59 @@ public class TestUI {
             workoutSession.addOneDoneExercise(exercise.getName(), parameterValues);
             
         }
+                
+        System.out.println("\nGive the id of a Google Sheets spreadsheet in which you want to save your exercise data\n"
+                + "(id is a long string of characters in the url of the document \".../d/[ID OF THE DOCUMENT]/edit#gid=0\"):");
+        String spreadsheetId = reader.nextLine();
         
-        System.out.println(workoutSession.toString());
+        workoutSessionToSheet(workoutSession, spreadsheetId);
         
         try (FileWriter writer = new FileWriter(new File(file))) {
             writer.write(user.getUsername() + ", " + firstRoutine.getName() + ":\n");
             writer.write(workoutSession.toString());
             
-            System.out.println("Your exercises are now saved in the file " + file);
+            System.out.println("\nA backup of your session is saved in the file " + file);
         } catch (Exception e) {
-            System.out.println("Something went wrong with saving your exercises to a file: " + e.getMessage());
+            System.out.println("\nSomething went wrong with saving your exercises to a file: " + e.getMessage());
         }   
+    }
+    
+    public static void workoutSessionToSheet(WorkoutSession session, String spreadsheetId) {
+        String workoutName = session.getRoutine().getName();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String sessionDate = dateFormat.format(session.getDate());
+
+        String firstParameter = session.getSessionContents().get(0).getParameters().get(0);
+        String secondParameter = session.getSessionContents().get(0).getParameters().get(1);
+        
+        List<ValueRange> data = new ArrayList<>();
+        data.add(new ValueRange().setRange("A1").setValues(Arrays.asList(Arrays.asList(workoutName, sessionDate), Arrays.asList("", firstParameter, secondParameter))));
+        int rowNumber = 3;
+        
+        for (DoneExercise exercise : session.getSessionContents()) {
+            if (!exercise.getParameters().get(0).equals(firstParameter) || !exercise.getParameters().get(1).equals(secondParameter)) {
+                data.add(new ValueRange().setRange("A" + rowNumber).setValues(Arrays.asList(Arrays.asList("", exercise.getParameters().get(0), exercise.getParameters().get(1)))));
+                rowNumber++;
+            }
+            
+            String exerciseName = exercise.getName();
+            String firstParameterValue = "" + exercise.getParameterValue(exercise.getParameters().get(0));
+            String secondParameterValue = "" + exercise.getParameterValue(exercise.getParameters().get(1));
+            data.add(new ValueRange().setRange("A" + rowNumber).setValues(Arrays.asList(Arrays.asList(exerciseName, firstParameterValue, secondParameterValue))));    
+            rowNumber++;
+        }
+        
+        BatchUpdateValuesRequest batchBody = new BatchUpdateValuesRequest().setValueInputOption("RAW").setData(data);
+     
+        try {
+            BatchUpdateValuesResponse batchResult = sheetsService.spreadsheets().values().batchUpdate(spreadsheetId, batchBody).execute();
+            System.out.println("\nYour session has been saved on the spreadsheet with the id: " + spreadsheetId);
+        } catch (Exception e) {
+            System.out.println("\nCould not save to Sheets. Error message: " + e);
+        }
     }
     
     public static void main(String[] args) {
         textUI();
-        
-        
-//        User user = new User("tester", "The Real Tester");
-//        
-//        Exercise squat = new Exercise("squat", user, "kg", "repetitions");
-//        Exercise deadlift = new Exercise("deadlift", user, "kg", "repetitions");
-//        Exercise calfRaise = new Exercise("calf raise", user, "kg", "repetitions");
-//        
-//        System.out.println(squat);
-//        System.out.println(deadlift);
-//        System.out.println(calfRaise);
-//        System.out.println("");
-//        
-//        List<Exercise> legdayExercises = new ArrayList<>();
-//        legdayExercises.add(squat);
-//        legdayExercises.add(deadlift);
-//        legdayExercises.add(calfRaise);
-//        
-//        Routine legdayRoutine = new Routine("legday", user);
-//        legdayRoutine.setExecises(legdayExercises);
-//        System.out.println(legdayRoutine);
-//        
-//        List<Integer> squatValues = new ArrayList<>();
-//        squatValues.add(50);
-//        squatValues.add(20);
-//        DoneExercise doneSquats = new DoneExercise(legdayRoutine.getExercises().get(0).getName(), user, legdayRoutine.getExercises().get(0).getParameters(), squatValues);
-//        List<Integer> deadliftValues = new ArrayList<>();
-//        deadliftValues.add(70);
-//        deadliftValues.add(15);
-//        DoneExercise doneDeadlifts = new DoneExercise(legdayRoutine.getExercises().get(1).getName(), user, legdayRoutine.getExercises().get(1).getParameters(), deadliftValues);
-//        
-//        
-//        System.out.println(doneSquats);
-//        System.out.println(doneDeadlifts);
     }
 }
