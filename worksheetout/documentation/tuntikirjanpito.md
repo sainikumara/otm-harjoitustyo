@@ -11,5 +11,5 @@
 | 20.4. | 4    | Refaktorointia ja Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
 | 21.4. | 3    | Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
 | 23.4. | 4    | Google Sheets -integraation säätöä |
-| 24.4. | 4    | Releasen generointi ja Google Sheets -integraation säätöä |
+| 24.4. | 4    | Releasen generointi ja Google Sheets -integraation perustoiminnallisuus |
 | yht   | 32   | | 
