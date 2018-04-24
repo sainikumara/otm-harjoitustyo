@@ -10,5 +10,6 @@
 | 17.4. | 1    | Testien koodausta |
 | 20.4. | 4    | Refaktorointia ja Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
 | 21.4. | 3    | Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
-| 23.4. | 1    | Releasen generointi |
-| yht   | 25   | | 
+| 23.4. | 4    | Google Sheets -integraation säätöä |
+| 24.4. | 4    | Releasen generointi ja Google Sheets -integraation säätöä |
+| yht   | 32   | | 
