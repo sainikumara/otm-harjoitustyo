@@ -8,4 +8,7 @@
 | 10.4. | 6    | Domain-luokkien, testikäyttöliittymän ja ensimmäisten testien koodaus |
 | 16.4. | 5    | Domain -luokkien, testien, ym., koodausta, checkstyle, luokkakaavio |
 | 17.4. | 1    | Testien koodausta |
-| yht   | 17   | | 
+| 20.4. | 4    | Refaktorointia ja Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
+| 21.4. | 3    | Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
+| 23.4. | 1    | Releasen generointi |
+| yht   | 25   | | 
