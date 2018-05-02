@@ -51,6 +51,28 @@ public class Routine {
         return this.exercises;
     }
     
+    public List<String> getExerciseNames() {
+        List<String> exerciseNames = new ArrayList<>();
+        for (Exercise exercise : this.exercises) {
+            exerciseNames.add(exercise.getName());
+            exerciseNames.add("");
+        }
+       
+       return exerciseNames;
+    }
+    
+    public List<String> getExerciseParameters() {
+        List<String> exerciseParameters = new ArrayList<>();
+       
+       
+        for (Exercise exercise : this.exercises) {
+            exerciseParameters.add(exercise.getParameters().get(0));
+            exerciseParameters.add(exercise.getParameters().get(1));
+        }
+
+        return exerciseParameters;
+    }
+    
     public void setExecises(List<Exercise> newExercises) {
         this.exercises = newExercises;
     }
