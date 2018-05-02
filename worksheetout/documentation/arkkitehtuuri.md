@@ -13,7 +13,11 @@ Käyttöliittymä on yksinkertainen tekstikäyttöliittymä, joka pyytää käyt
 Käyttöliittymä kutsuu workoutService-olion metodeja, joiden avulla käyttäjän syöttämät tiedot tallennetaan.
 
 ## Sovelluslogiikka
-Sovelluksen loogisen datamallin muodostavat luokat [User](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/User.java), [Exercise](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/Exercise.java), [DoneExercise](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/DoneExercise.java), [Routine](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/Routine.java) ja [WorkoutSession](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/WorkoutSession.java), jotka kuvaavat käyttäjiä, harjoituksia, harjoitusohjelmia ja harjoituskertoja:
+Sovelluksen loogisen datamallin muodostavat luokat [User](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/User.java), [Exercise](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/Exercise.java), [DoneExercise](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/DoneExercise.java), [Routine](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/Routine.java) ja [WorkoutSession](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/WorkoutSession.java), jotka kuvaavat käyttäjiä, harjoituksia, harjoitusohjelmia ja harjoituskertoja.
+
+Toiminnallisista kokonaisuuksista vastaa luokkan [WorkoutService](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/WorkoutService.java) ainoa olio.
+
+_WorkoutService_ pääsee käsiksi harjoituksiin, harjoitusohjelmiin ja harjoituskertoihin tietojen tallennuksesta vastaavan pakkauksessa _worksheetout.dao_ sijaitsevien rajapinnat _RoutineDao_ ja _WorkoutSessionDao_ toteuttavien luokkien kautta. Luokkien toteutukset [injektoidaan](https://en.wikipedia.org/wiki/Dependency_injection) sovelluslogiikalle konstruktorikutsun yhteydessä.
 
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/otm-project-class-diagram.png" width="450">
 
