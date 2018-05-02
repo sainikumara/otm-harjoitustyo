@@ -49,6 +49,16 @@ mvn package
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _worksheetout-1.0-SNAPSHOT.jar_
 
+### JavaDoc
+
+JavaDoc generoidaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia voi tarkastella avaamalla selaimella tiedosto _target/site/apidocs/index.html_
+
 ### Checkstyle
 
 Tiedostossa [checkstyle.xml](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/checkstyle.xml) määrittellyt tarkistukset suoritetaan komennolla
