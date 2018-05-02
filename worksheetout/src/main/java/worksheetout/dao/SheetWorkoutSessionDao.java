@@ -11,6 +11,9 @@ import java.util.List;
 import worksheetout.domain.Routine;
 import worksheetout.domain.WorkoutSession;
 
+/**
+ * The class for handling the connection of WorkoutSessions and Google Sheets
+ */
 
 public class SheetWorkoutSessionDao implements WorkoutSessionDao {
     private Sheets sheetsService;
@@ -22,6 +25,13 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
     public Sheets getSheetsService() {
         return this.sheetsService;
     }
+    
+    /**
+     * Save a workout session to a Google Sheets document
+     * @param session the workout session to be saved
+     * @param spreadsheetId the id of the sheets document in which the session is to be saved
+     * @throws Exception 
+     */
     
     @Override
     public void save(WorkoutSession session, String spreadsheetId) throws Exception {

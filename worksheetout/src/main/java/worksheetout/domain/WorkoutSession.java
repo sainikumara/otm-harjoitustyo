@@ -48,6 +48,11 @@ public class WorkoutSession {
         this.sessionContents = newContents;
     }
     
+    /**
+     * 
+     * @return the date of the workout session and all the parameter values
+     */
+    
     public List<String> getDateAndExerciseParameterValues() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String sessionDate = dateFormat.format(this.date);
@@ -62,6 +67,12 @@ public class WorkoutSession {
         
         return values;
     }
+    
+    /**
+     * Adding one exercise to the session
+     * @param name  name of the exercise to be added
+     * @param parameterValues   values of the parameters of the exercise
+     */
     
     public void addOneDoneExercise(String name, List<Integer> parameterValues) {
         Exercise exercise = this.routine.getOneExercise(name);

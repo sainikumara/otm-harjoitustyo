@@ -44,8 +44,8 @@ public class WorkoutService {
     
     /**
      * Saving a workout routine to Google Sheets
-     * @param routine
-     * @param spreadsheetId 
+     * @param routine workout routine to be saved
+     * @param spreadsheetId the id of the sheet in which the routine is to be saved
      */
     
     public void routineToSheet(Routine routine, String spreadsheetId) {
@@ -59,8 +59,8 @@ public class WorkoutService {
     
     /**
      * Saving a workout session to Google Sheets
-     * @param session
-     * @param spreadsheetId 
+     * @param session workout session to be saved
+     * @param spreadsheetId the id of the sheet in which the session is to be saved
      */
     
     public void workoutSessionToSheet(WorkoutSession session, String spreadsheetId) {
