@@ -51,6 +51,10 @@ public class Routine {
         return this.exercises;
     }
     
+    /**
+     * Listing the names of the exercises that are part of the routine
+     **/
+    
     public List<String> getExerciseNames() {
         List<String> exerciseNames = new ArrayList<>();
         for (Exercise exercise : this.exercises) {
@@ -60,6 +64,10 @@ public class Routine {
        
         return exerciseNames;
     }
+    
+    /**
+     * Listing all the parameters of the exercises that are part of the routine
+     **/
     
     public List<String> getExerciseParameters() {
         List<String> exerciseParameters = new ArrayList<>();
@@ -75,6 +83,12 @@ public class Routine {
     public void setExecises(List<Exercise> newExercises) {
         this.exercises = newExercises;
     }
+    
+    /**
+     * Adds one exercise to the routine
+     * 
+     * @param newExercise new exercise
+     **/
     
     public void addOneExercise(Exercise newExercise) {
         this.exercises.add(newExercise);

@@ -13,6 +13,10 @@ import worksheetout.dao.WorkoutSessionDao;
 import worksheetout.dao.SheetWorkoutSessionDao;
 import worksheetout.domain.Routine;
 
+/**
+ * The class responsible for the logic of the application
+ **/
+
 public class WorkoutService {
     private Sheets sheetsService;
     private RoutineDao routineDao;
@@ -28,9 +32,21 @@ public class WorkoutService {
         this.workoutSessionDao = new SheetWorkoutSessionDao(this.sheetsService);
     }
     
+    /**
+     * Setting up Google Sheets Service
+     * @throws GeneralSecurityException
+     * @throws IOException 
+     */
+    
     public void setupSheetService() throws GeneralSecurityException, IOException {
         sheetsService = SheetsServiceUtil.getSheetsService();
     }
+    
+    /**
+     * Saving a workout routine to Google Sheets
+     * @param routine
+     * @param spreadsheetId 
+     */
     
     public void routineToSheet(Routine routine, String spreadsheetId) {
         try {
@@ -40,6 +56,12 @@ public class WorkoutService {
             System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
         }
     }
+    
+    /**
+     * Saving a workout session to Google Sheets
+     * @param session
+     * @param spreadsheetId 
+     */
     
     public void workoutSessionToSheet(WorkoutSession session, String spreadsheetId) {
       
