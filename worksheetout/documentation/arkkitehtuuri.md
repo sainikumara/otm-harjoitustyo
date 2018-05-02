@@ -25,6 +25,7 @@ _WorkoutService_ pääsee käsiksi harjoituksiin, harjoitusohjelmiin ja harjoitu
 Pakkauksen _worksheetout.dao_ luokat _RoutineDao_, _SheetRoutineDao_, _WorkoutSessionDao_ ja _SheetWorkoutSessionDao_ huolehtivat tietojen tallettamisesta tiedostoihin.
 
 ## Päätoiminnallisuudet
+### Harjoitusohjelman ja harjoituksen luominen
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/add_routine_add_exercise.png" width="450">
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
