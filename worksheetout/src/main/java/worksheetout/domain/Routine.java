@@ -58,13 +58,12 @@ public class Routine {
             exerciseNames.add("");
         }
        
-       return exerciseNames;
+        return exerciseNames;
     }
     
     public List<String> getExerciseParameters() {
         List<String> exerciseParameters = new ArrayList<>();
-       
-       
+             
         for (Exercise exercise : this.exercises) {
             exerciseParameters.add(exercise.getParameters().get(0));
             exerciseParameters.add(exercise.getParameters().get(1));
