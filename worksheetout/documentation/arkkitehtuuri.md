@@ -1,6 +1,11 @@
 # Arkkitehtuurikuvaus
 
 ## Rakenne
+Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria, ja koodin pakkausrakenne on seuraava:
+
+<img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/package-diagram.png" width="160">
+
+Pakkaus _worksheetout.ui_ sisältää tekstikäyttöliittymän, _worksheetout.domain_ sovelluslogiikan ja _worksheetout.dao_ tietojen tallennuksesta vastaavan koodin.
 
 ## Käyttöliittymä
 
