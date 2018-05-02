@@ -8,11 +8,15 @@ Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria, ja koodin pakka
 Pakkaus _worksheetout.ui_ sisältää tekstikäyttöliittymän, _worksheetout.domain_ sovelluslogiikan ja _worksheetout.dao_ tietojen tallennuksesta vastaavan koodin.
 
 ## Käyttöliittymä
+Käyttöliittymä on yksinkertainen tekstikäyttöliittymä, joka pyytää käyttäjä syöttämään ensin omat tietonsa, sitten harjoitusohjelman tiedot ja sitten harjoitusohjelmaan liittyvien harjoituskertojen tiedot.
+
+Käyttöliittymä kutsuu workoutService-olion metodeja, joiden avulla käyttäjän syöttämät tiedot tallennetaan.
 
 ## Sovelluslogiikka
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/otm-project-class-diagram.png" width="450">
 
 ## Tietojen pysyväistallennus
+Pakkauksen _worksheetout.dao_ luokat _RoutineDao_, _SheetRoutineDao_, _WorkoutSessionDao_ ja _SheetWorkoutSessionDao_ huolehtivat tietojen tallettamisesta tiedostoihin.
 
 ## Päätoiminnallisuudet
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/sequence_diagram-01.png" width="450">
