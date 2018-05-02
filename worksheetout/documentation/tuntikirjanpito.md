@@ -12,4 +12,5 @@
 | 21.4. | 3    | Google Sheetsin ja OAuth 2.0:n käyttöön tutustumista |
 | 23.4. | 4    | Google Sheets -integraation säätöä |
 | 24.4. | 5    | Releasen generointi, Google Sheets -integraation perustoiminnallisuus, sekvenssikaavio |
-| yht   | 33   | | 
+| 2.5.  | 10   | Refaktorointi, tallennuksen ja tekstikäyttöliittymän muutos, javadocin aloitus, uusi release |
+| yht   | 43   | | 
