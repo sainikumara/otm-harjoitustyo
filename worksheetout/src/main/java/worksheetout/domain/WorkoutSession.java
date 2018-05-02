@@ -1,5 +1,7 @@
 package worksheetout.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +46,21 @@ public class WorkoutSession {
     
     public void setSessionContents(List<DoneExercise> newContents) {
         this.sessionContents = newContents;
+    }
+    
+    public List<String> getDateAndExerciseParameterValues() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String sessionDate = dateFormat.format(this.date);
+        
+        List<String> values = new ArrayList<>();
+        values.add(sessionDate);
+        
+        for (DoneExercise exercise : this.sessionContents) {
+            values.add(Integer.toString(exercise.getParameterValue(exercise.getParameters().get(0))));
+            values.add(Integer.toString(exercise.getParameterValue(exercise.getParameters().get(1))));
+        }
+        
+        return values;
     }
     
     public void addOneDoneExercise(String name, List<Integer> parameterValues) {

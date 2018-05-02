@@ -9,11 +9,14 @@ import java.util.Arrays;
 import worksheetout.dao.RoutineDao;
 import worksheetout.dao.SheetRoutineDao;
 import worksheetout.dao.SheetsServiceUtil;
+import worksheetout.dao.WorkoutSessionDao;
+import worksheetout.dao.SheetWorkoutSessionDao;
 import worksheetout.domain.Routine;
 
 public class WorkoutService {
     private Sheets sheetsService;
     private RoutineDao routineDao;
+    private WorkoutSessionDao workoutSessionDao;
     
     public WorkoutService() {
         try {
@@ -21,16 +24,12 @@ public class WorkoutService {
         } catch (Exception e) {
             System.out.println("Could not set up Sheets service. Error message: " + e);
         }
-        routineDao = new SheetRoutineDao(sheetsService);
+        this.routineDao = new SheetRoutineDao(this.sheetsService);
+        this.workoutSessionDao = new SheetWorkoutSessionDao(this.sheetsService);
     }
     
     public void setupSheetService() throws GeneralSecurityException, IOException {
         sheetsService = SheetsServiceUtil.getSheetsService();
-    }
-    
-    public Routine createRoutine(String routineName, User user) {
-        Routine routine = new Routine(routineName, user);
-        return routine;
     }
     
     public void routineToSheet(Routine routine, String spreadsheetId) {

@@ -1,14 +1,13 @@
 package worksheetout.dao;
 
 import java.util.List;
+import worksheetout.domain.Routine;
 import worksheetout.domain.WorkoutSession;
 
 public interface WorkoutSessionDao {
 
-    WorkoutSession create(WorkoutSession workoutSession) throws Exception;
+    void save(WorkoutSession session, String spreadsheetId) throws Exception;
 
     List<WorkoutSession> getAll();
-
-    void setDone(int id) throws Exception;
 
 }
