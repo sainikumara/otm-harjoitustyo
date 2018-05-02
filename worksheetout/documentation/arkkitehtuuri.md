@@ -13,6 +13,8 @@ Käyttöliittymä on yksinkertainen tekstikäyttöliittymä, joka pyytää käyt
 Käyttöliittymä kutsuu workoutService-olion metodeja, joiden avulla käyttäjän syöttämät tiedot tallennetaan.
 
 ## Sovelluslogiikka
+Sovelluksen loogisen datamallin muodostavat luokat [User](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/User.java), [Exercise](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/Exercise.java), [DoneExercise](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/DoneExercise.java), [Routine](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/Routine.java) ja [WorkoutSession](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/WorkoutSession.java), jotka kuvaavat käyttäjiä, harjoituksia, harjoitusohjelmia ja harjoituskertoja:
+
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/otm-project-class-diagram.png" width="450">
 
 ## Tietojen pysyväistallennus
