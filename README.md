@@ -5,6 +5,8 @@ Treenien seurannan helpottamista varten rakennettu yksinkertainen sovellus.
 
 ### Dokumentaatio
 
+[Käyttöohje](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/kayttoohje.md)
+
 [Vaatimusmäärittely](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/vaatimusmaarittely.md)
 
 [Arkkitehtuurikuvaus](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/arkkitehtuuri.md)
