@@ -17,7 +17,7 @@ Sovelluksen loogisen datamallin muodostavat luokat [User](https://github.com/sai
 
 Toiminnallisista kokonaisuuksista vastaa luokkan [WorkoutService](https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/src/main/java/worksheetout/domain/WorkoutService.java) ainoa olio.
 
-_WorkoutService_ pääsee käsiksi harjoituksiin, harjoitusohjelmiin ja harjoituskertoihin tietojen tallennuksesta vastaavan pakkauksessa _worksheetout.dao_ sijaitsevien rajapinnat _RoutineDao_ ja _WorkoutSessionDao_ toteuttavien luokkien kautta. Luokkien toteutukset [injektoidaan](https://en.wikipedia.org/wiki/Dependency_injection) sovelluslogiikalle konstruktorikutsun yhteydessä.
+_WorkoutService_ pääsee käsiksi harjoituksiin, harjoitusohjelmiin ja harjoituskertoihin tietojen tallennuksesta vastaavan pakkauksessa _worksheetout.dao_ sijaitsevien rajapinnat _RoutineDao_ ja _WorkoutSessionDao_ toteuttavien luokkien kautta.
 
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/otm-project-class-diagram.png" width="450">
 
