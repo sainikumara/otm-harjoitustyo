@@ -9,26 +9,14 @@ import java.util.List;
 
 public class Routine {
 
-    private int id;
     private String name;
     private User user;
     private List<Exercise> exercises;
-
-    public Routine(int id, String newName, User newUser) {
-        this.id = id;
-        this.name = newName;
-        this.user = newUser;
-        this.exercises = new ArrayList<>();
-    }
     
     public Routine(String newName, User newUser) {
         this.name = newName;
         this.user = newUser;
         this.exercises = new ArrayList<>();
-    }
-    
-    public void setId(int newId) {
-        this.id = newId;
     }
     
     public void setName(String newName) {
@@ -41,10 +29,6 @@ public class Routine {
 
     public User getUser() {
         return this.user;
-    }
-
-    public int getId() {
-        return this.id;
     }
     
     public List<Exercise> getExercises() {
@@ -105,7 +89,7 @@ public class Routine {
             return false;
         }
         Routine other = (Routine) obj;
-        return this.id == other.id;
+        return this.name.equals(other.name);
     }
 
     @Override

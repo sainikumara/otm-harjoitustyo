@@ -33,10 +33,5 @@ public class SheetRoutineDao implements RoutineDao {
         
         BatchUpdateValuesResponse batchResult = sheetsService.spreadsheets().values().batchUpdate(spreadsheetId, batchBody).execute();
     }
-
-    @Override
-    public List<Routine> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

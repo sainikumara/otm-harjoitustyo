@@ -14,17 +14,9 @@ import java.util.Map;
 
 public class WorkoutSession {
 
-    private int id;
     private Date date;
     private Routine routine;
     private List<DoneExercise> sessionContents;
-
-    public WorkoutSession(int id, Date newDate, Routine newRoutine) {
-        this.id = id;
-        this.date = newDate;
-        this.routine = newRoutine;
-        this.sessionContents = new ArrayList<>();
-    }
     
     public WorkoutSession(Date newDate, Routine newRoutine) {
         this.date = newDate;
@@ -80,17 +72,10 @@ public class WorkoutSession {
         this.sessionContents.add(doneExercise);
     }
     
-    public void setId(int newId) {
-        this.id = newId;
-    }
-    
     public void setDate(Date newDate) {
         this.date = newDate;
     }
 
-    public int getId() {
-        return this.id;
-    }
     
     public Date getDate() {
         return this.date;
@@ -102,7 +87,7 @@ public class WorkoutSession {
             return false;
         }
         WorkoutSession other = (WorkoutSession) obj;
-        return id == other.id;
+        return (this.date.equals(other.date)) && (this.routine.equals(other.routine));
     }
     
     @Override

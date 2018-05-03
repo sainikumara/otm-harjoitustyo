@@ -8,6 +8,4 @@ public interface RoutineDao {
 
     void save(Routine routine, String spreadsheetId) throws Exception;
 
-    List<Routine> getAll();
-
 }

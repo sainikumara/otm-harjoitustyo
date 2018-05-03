@@ -71,7 +71,7 @@ public class Exercise {
     
     @Override
     public String toString() {
-        return this.name + " (parametrit: " + this.parameterNames.get(0) + ", " + this.parameterNames.get(1) + ")";
+        return this.name + " (parameters: " + this.parameterNames.get(0) + ", " + this.parameterNames.get(1) + ")";
     }
 
 }

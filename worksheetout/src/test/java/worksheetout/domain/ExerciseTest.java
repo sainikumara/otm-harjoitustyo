@@ -72,7 +72,7 @@ public class ExerciseTest {
     }
     
     @Test
-    public void nonEqualWhenDifferentUsername() {
+    public void nonEqualWhenDifferentName() {
         Exercise e = new Exercise("squat");
         assertFalse(e.equals(exerciseIdNoParameters));
     }
@@ -85,6 +85,6 @@ public class ExerciseTest {
     
     @Test
     public void toStringWorks() {
-        assertTrue(exerciseIdParameters.toString().equals("legpress (parametrit: kg, repetitions)"));
+        assertTrue(exerciseIdParameters.toString().equals("legpress (parameters: kg, repetitions)"));
     }
 }
