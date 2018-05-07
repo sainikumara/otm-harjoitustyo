@@ -52,6 +52,8 @@ public class TestUI {
         
         workoutService.routineToSheet(routine, spreadsheetId);
         
+        System.out.println("Routines so far: " + workoutService.getRoutineNames(spreadsheetId));
+        
         System.out.println("Your first exercise routine looks like this: " + routine);
         System.out.println("");
         

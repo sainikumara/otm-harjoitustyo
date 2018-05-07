@@ -7,7 +7,7 @@ import java.util.Arrays;
 import worksheetout.domain.WorkoutSession;
 
 /**
- * The class for handling the connection of WorkoutSessions and Google Sheets
+ * The class for handling the connection between WorkoutSessions and Google Sheets
  */
 
 public class SheetWorkoutSessionDao implements WorkoutSessionDao {
@@ -26,7 +26,14 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
     
     @Override
     public void save(WorkoutSession session, String spreadsheetId) throws Exception {
-        ValueRange appendBody = new ValueRange().setValues(Arrays.asList(Arrays.asList(session.getDateAndExerciseParameterValues().toArray())));
-        AppendValuesResponse appendResult = sheetsService.spreadsheets().values().append(spreadsheetId, "A4", appendBody).setValueInputOption("RAW").setInsertDataOption("INSERT_ROWS").setIncludeValuesInResponse(true).execute();
+        ValueRange appendBody = new ValueRange().setValues(Arrays.asList(Arrays.asList(session
+                .getDateAndExerciseParameterValues().toArray())));
+        System.out.println("'" + session.getRoutine().getName() + "'!A3");
+        System.out.println("TESTING");
+        sheetsService.spreadsheets().values()
+                .append(spreadsheetId, "'" + session.getRoutine().getName() + "'!A3", appendBody)
+                .setValueInputOption("RAW")
+                .setInsertDataOption("INSERT_ROWS")
+                .setIncludeValuesInResponse(true).execute();
     }
 }

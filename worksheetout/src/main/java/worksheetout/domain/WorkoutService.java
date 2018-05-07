@@ -5,7 +5,9 @@ import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import worksheetout.dao.RoutineDao;
 import worksheetout.dao.SheetRoutineDao;
 import worksheetout.dao.SheetsServiceUtil;
@@ -24,12 +26,12 @@ public class WorkoutService {
     
     public WorkoutService() {
         try {
-            setupSheetService();
+            setupSheetsService();
         } catch (Exception e) {
             System.out.println("Could not set up Sheets service. Error message: " + e);
         }
         this.routineDao = new SheetRoutineDao(this.sheetsService);
-        this.workoutSessionDao = new SheetWorkoutSessionDao(this.sheetsService);
+        this.workoutSessionDao = new SheetWorkoutSessionDao(this.sheetsService);             
     }
     
     /**
@@ -38,7 +40,7 @@ public class WorkoutService {
      * @throws IOException 
      */
     
-    public void setupSheetService() throws GeneralSecurityException, IOException {
+    public void setupSheetsService() throws GeneralSecurityException, IOException {
         sheetsService = SheetsServiceUtil.getSheetsService();
     }
     
@@ -57,6 +59,18 @@ public class WorkoutService {
         }
     }
     
+    
+    public List<String> getRoutineNames(String spreadsheetId) {
+        SheetRoutineDao sheetRoutineDao = new SheetRoutineDao(this.sheetsService);
+        List<String> routineNames = new ArrayList<>();
+        try {
+            routineNames = sheetRoutineDao.getRoutineNames(spreadsheetId);
+        } catch (Exception e) {
+            
+        }
+        return routineNames;
+    }
+    
     /**
      * Saving a workout session to Google Sheets
      * @param session workout session to be saved
@@ -64,11 +78,8 @@ public class WorkoutService {
      */
     
     public void workoutSessionToSheet(WorkoutSession session, String spreadsheetId) {
-      
-        ValueRange appendBody = new ValueRange().setValues(Arrays.asList(Arrays.asList(session.getDateAndExerciseParameterValues().toArray())));
-
         try {
-            AppendValuesResponse appendResult = sheetsService.spreadsheets().values().append(spreadsheetId, "A4", appendBody).setValueInputOption("RAW").setInsertDataOption("INSERT_ROWS").setIncludeValuesInResponse(true).execute();
+            this.workoutSessionDao.save(session, spreadsheetId);
             System.out.println("\nYour session has been saved on the spreadsheet with the id: " + spreadsheetId + "\n");
         } catch (Exception e) {
             System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
