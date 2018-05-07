@@ -14,4 +14,8 @@
 | 24.4. | 5    | Releasen generointi, Google Sheets -integraation perustoiminnallisuus, sekvenssikaavio |
 | 2.5.  | 10   | Refaktorointi, tallennuksen ja tekstikäyttöliittymän muutos, javadocin aloitus, uusi release |
 | 3.5.  | 3    | Refaktorointia ja testejä |
+| 4.5.  | 1    | Koodikatselmointipalautteen lukeminen ja pohtiminen |
+| 6.5.  | 4    | Google Sheetsin APIn opiskelua |
+| 7.5.  | 5    | Google Sheetsin APIn opiskelua ja lisää siihen liittyviä toiminnallisuuksia, refaktorointia |
+| 8.5.  | 2    | Lisää Google Sheets -toiminnallisuuksia ja testien päivityksiä |
 | yht   | 46   | | 
