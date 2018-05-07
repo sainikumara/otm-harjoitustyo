@@ -10,12 +10,10 @@ import java.util.List;
 public class Routine {
 
     private String name;
-    private User user;
     private List<Exercise> exercises;
     
-    public Routine(String newName, User newUser) {
+    public Routine(String newName) {
         this.name = newName;
-        this.user = newUser;
         this.exercises = new ArrayList<>();
     }
     
@@ -25,10 +23,6 @@ public class Routine {
 
     public String getName() {
         return this.name;
-    }
-
-    public User getUser() {
-        return this.user;
     }
     
     public List<Exercise> getExercises() {

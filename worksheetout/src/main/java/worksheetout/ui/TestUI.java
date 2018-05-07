@@ -31,7 +31,7 @@ public class TestUI {
         System.out.println("\nWelcome, " + name + "! Now, let's get started with your first workout routine.");
         System.out.print("Please give a name for the routine: ");
         String routineName = scanner.nextLine();
-        Routine routine = new Routine(routineName, user);
+        Routine routine = new Routine(routineName);
         
         System.out.println("Next, add the exercises you want to add to this routine");
         

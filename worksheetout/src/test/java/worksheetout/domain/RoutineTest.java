@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 
 public class RoutineTest {
     Routine routine;
-    User user;
     List<Exercise> exercises;
     
     @Before
@@ -19,8 +18,8 @@ public class RoutineTest {
         exercises = new ArrayList<>();
         exercises.add(calfRaise);
         exercises.add(squat);
-        user = new User("tester", "Terttu");
-        routine = new Routine("Leg day", user);
+        
+        routine = new Routine("Leg day");
     }
     
     @Test
@@ -32,11 +31,6 @@ public class RoutineTest {
     public void setNameWorks() {
         routine.setName("Arm day");
         assertEquals(routine.getName(), "Arm day");
-    }
-    
-    @Test
-    public void getUserWorks() {
-        assertEquals(routine.getUser(), user);
     }
     
     @Test
@@ -82,14 +76,14 @@ public class RoutineTest {
     
     @Test
     public void equalWhenSameName() {
-        Routine routine2 = new Routine("Leg day", user);
+        Routine routine2 = new Routine("Leg day");
         
         assertEquals(routine, routine2);
     }
     
     @Test
     public void nonEqualWhenDifferentName() {
-        Routine routine2 = new Routine("Arm day", user);
+        Routine routine2 = new Routine("Arm day");
         
         assertFalse(routine.equals(routine2));
     }

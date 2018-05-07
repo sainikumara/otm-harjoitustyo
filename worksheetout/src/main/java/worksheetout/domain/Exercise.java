@@ -9,34 +9,17 @@ import java.util.List;
 
 public class Exercise {
 
-    private int id;
     private String name;
     private List<String> parameterNames = new ArrayList<>();
-
-    public Exercise(int id, String newName) {
-        this.id = id;
-        this.name = newName;
-    }
     
     public Exercise(String newName) {
         this.name = newName;
-    }
-    
-    public Exercise(int id, String newName, String parameter1, String parameter2) {
-        this.id = id;
-        this.name = newName;
-        this.parameterNames.add(parameter1);
-        this.parameterNames.add(parameter2);
     }
     
     public Exercise(String newName, String parameter1, String parameter2) {
         this.name = newName;
         this.parameterNames.add(parameter1);
         this.parameterNames.add(parameter2);
-    }
-    
-    public void setId(int newId) {
-        this.id = newId;
     }
     
     public void setName(String newName) {
@@ -50,10 +33,6 @@ public class Exercise {
 
     public String getName() {
         return this.name;
-    }
-
-    public int getId() {
-        return this.id;
     }
     
     public List<String> getParameters() {

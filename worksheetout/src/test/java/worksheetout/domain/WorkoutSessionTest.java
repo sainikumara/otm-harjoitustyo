@@ -26,8 +26,8 @@ public class WorkoutSessionTest {
         exercises = new ArrayList<>();
         exercises.add(calfRaise);
         exercises.add(squat);
-        user = new User("tester", "Terttu");
-        routine = new Routine("Leg day", user);
+
+        routine = new Routine("Leg day");
         routine.setExecises(exercises);
         
         date = new Date();
@@ -77,7 +77,7 @@ public class WorkoutSessionTest {
     
     @Test
     public void setRoutineWorks() {
-        Routine routine2 = new Routine("Arm day", user);
+        Routine routine2 = new Routine("Arm day");
         session.setRoutine(routine2);
         
         assertEquals(session.getRoutine(), routine2);
@@ -127,7 +127,7 @@ public class WorkoutSessionTest {
     
     @Test
     public void equalWhenSameDateAndRoutine() {
-        Routine routine2 = new Routine("Leg day", user);
+        Routine routine2 = new Routine("Leg day");
         WorkoutSession session2 = new WorkoutSession(date, routine2);
         
         assertEquals(session, session2);
@@ -135,7 +135,7 @@ public class WorkoutSessionTest {
     
     @Test
     public void nonEqualWhenDifferentRoutine() {
-        Routine routine2 = new Routine("Arm day", user);
+        Routine routine2 = new Routine("Arm day");
         WorkoutSession session2 = new WorkoutSession(date, routine2);
         
         assertFalse(session.equals(session2));
