@@ -18,4 +18,4 @@
 | 6.5.  | 4    | Google Sheetsin APIn opiskelua |
 | 7.5.  | 5    | Google Sheetsin APIn opiskelua ja lisää siihen liittyviä toiminnallisuuksia, refaktorointia |
 | 8.5.  | 2    | Lisää Google Sheets -toiminnallisuuksia ja testien päivityksiä |
-| yht   | 46   | | 
+| yht   | 58   | | 
