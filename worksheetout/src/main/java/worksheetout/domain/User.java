@@ -5,20 +5,20 @@ package worksheetout.domain;
  */
 
 public class User {
-    private String name;
     private String username;
+    private String spreadsheetId;
 
-    public User(String username, String name) {
-        this.name = name;
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
+    public User(String name, String newSpreadsheetId) {
+        this.username = name;
+        this.spreadsheetId = newSpreadsheetId;
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
+    }
+
+    public String getSpreadsheetId() {
+        return this.spreadsheetId;
     }
 
     @Override
@@ -28,11 +28,11 @@ public class User {
         }
         
         User other = (User) obj;
-        return username.equals(other.username);
+        return this.username.equals(other.username);
     }
     
     @Override
     public String toString() {
-        return this.name + ", " + this.username;
+        return this.username + ", " + this.spreadsheetId;
     }
 }
