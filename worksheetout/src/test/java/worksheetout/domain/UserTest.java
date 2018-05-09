@@ -12,7 +12,7 @@ public class UserTest {
     
     @Before
     public void setUp() {
-        u1 = new User("tester", "Terttu");
+        u1 = new User("tester", "ididid");
     }
     
     @Test
@@ -21,19 +21,19 @@ public class UserTest {
     }
     
     @Test
-    public void nameIsCorrect() {
-        assertTrue(u1.getName().equals("Terttu"));
+    public void spreadsheetIdIsCorrect() {
+        assertTrue(u1.getSpreadsheetId().equals("ididid"));
     }
     
     @Test
     public void equalWhenSameUsername() {
-        User u2 = new User("tester", "Terttu");
+        User u2 = new User("tester", "ididid");
         assertTrue(u1.equals(u2));
     }
     
     @Test
     public void nonEqualWhenDifferentUsername() {
-        User u2 = new User("martikainen", "Jarkko");
+        User u2 = new User("martikainen", "ididid");
         assertFalse(u1.equals(u2));
     }
     
@@ -45,6 +45,6 @@ public class UserTest {
     
     @Test
     public void toStringWorks() {
-        assertTrue(u1.toString().equals("Terttu, tester"));
+        assertEquals(u1.toString(), "tester, ididid");
     }
 }
