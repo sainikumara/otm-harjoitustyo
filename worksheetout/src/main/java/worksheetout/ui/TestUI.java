@@ -115,9 +115,9 @@ public class TestUI {
         Exercise exercise = new Exercise(exerciseName, parameter1, parameter2);
         routine.addOneExercise(exercise);
     }
-    
-    public static void main(String[] args) {
-        WorkoutService workoutService = new WorkoutService();
-        textUI(workoutService);
-    }
+//    
+//    public static void main(String[] args) {
+//        WorkoutService workoutService = new WorkoutService();
+//        textUI(workoutService);
+//    }
 }
