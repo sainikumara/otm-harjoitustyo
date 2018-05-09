@@ -115,4 +115,64 @@ public class WorkoutService {
             System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
         }
     }
+
+    /**
+    * Logging in
+    * 
+    * @param   username
+    * 
+    * @return true if username exists, otherwise false 
+    */    
+
+    public boolean login(String username) {
+        User user = this.userDao.findByUsername(username);
+        if (user == null) {
+            return false;
+        }
+        
+        this.loggedIn = user;
+        
+        return true;
+    }
+    
+    /**
+    * The user that is logged in
+    * 
+    * @return the logged in user 
+    */   
+    
+    public User getLoggedUser() {
+        return this.loggedIn;
+    }
+   
+    /**
+    * Logging out
+    */  
+    
+    public void logout() {
+        this.loggedIn = null;  
+    }
+    
+    /**
+    * Creating a new user
+    * 
+    * @param   username   username
+    * @param   spreadsheetId   spreadsheet id
+    * 
+    * @return true if user successfully created, otherwise false 
+    */ 
+    
+    public boolean createUser(String username, String spreadsheetId)  {   
+        if (this.userDao.findByUsername(username) != null) {
+            return false;
+        }
+        User user = new User(username, spreadsheetId);
+        try {
+            this.userDao.create(user);
+        } catch(Exception e) {
+            return false;
+        }
+
+        return true;
+    }
 }
