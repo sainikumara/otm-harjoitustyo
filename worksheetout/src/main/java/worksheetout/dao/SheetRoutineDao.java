@@ -66,22 +66,19 @@ public class SheetRoutineDao implements RoutineDao {
     }
     
     public void setSpreadsheet(String spreadsheetId) throws Exception {
-        if (this.spreadsheet == null) {
-            this.spreadsheet = this.sheetsService.spreadsheets().get(spreadsheetId).execute();
-        }
+        this.spreadsheet = this.sheetsService.spreadsheets().get(spreadsheetId).execute();       
     }
     
-    public List<Sheet> getWorkouts(String spreadsheetId) throws Exception {
+    public List<Sheet> getWorksheets(String spreadsheetId) throws Exception {
         this.setSpreadsheet(spreadsheetId);
         
         List<Sheet> sheets = this.spreadsheet.getSheets();
         System.out.println("Sheets: " + sheets);
-        
         return sheets;
     }
     
     public List<Routine> getRoutines(String spreadsheetId) throws Exception {
-        List<Sheet> sheets = this.getWorkouts(spreadsheetId);
+        List<Sheet> sheets = this.getWorksheets(spreadsheetId);
         List<Routine> routines = new ArrayList<>();
         
         for (Sheet sheet : sheets) {
@@ -94,22 +91,25 @@ public class SheetRoutineDao implements RoutineDao {
     
     public Routine getOneRoutine(Sheet sheet, String spreadsheetId) throws Exception {
         String routineName = sheet.getProperties().getTitle();
-        System.out.println("Routine name: " + routineName);
         Routine routine = new Routine(routineName);
-        System.out.println("routine: " + routine);
+        if (this.getExercises(routineName, spreadsheetId) == null) {
+            return routine;
+        }
         routine.setExecises(this.getExercises(routineName, spreadsheetId));
-        System.out.println("routine with exercises: " + routine);
         return routine;
     }
     
     public List<Exercise> getExercises(String range, String spreadsheetId) throws Exception {
         List<List<Object>> columns = this.getSheetValues(range, spreadsheetId);
+        
+        if (columns == null) {
+            return null;
+        }
         List<Exercise> exercises = new ArrayList<>();
         
         for (int i = 1; i < columns.size(); i = i + 2) {
             if (!columns.get(i).get(0).toString().isEmpty()) {
                 Exercise exercise = this.getOneExercise(columns.get(i), columns.get(i + 1));
-                System.out.println("Exercise: " + exercise);
                 exercises.add(exercise);
             }
 	}
@@ -117,12 +117,18 @@ public class SheetRoutineDao implements RoutineDao {
     }
     
     public Exercise getOneExercise(List<Object> column1, List<Object> column2) throws Exception {
-        String exerciseName = column1.get(0).toString();
-        System.out.println("Exercise name: " + exerciseName);
-        String firstParameter = column1.get(1).toString();
-        System.out.println("Parameter1: " + firstParameter);
-        String secondParameter = column2.get(1).toString();
-        System.out.println("Parameter2: " + secondParameter);
+        String exerciseName = "";
+        if (column1.get(0) != null) {
+            exerciseName = column1.get(0).toString();
+        }
+        String firstParameter = "";
+        if (column1.get(1) != null) {
+            firstParameter = column1.get(1).toString();
+        }
+        String secondParameter = "";
+        if (column2.get(1) != null) {
+            secondParameter = column2.get(1).toString();
+        }
         Exercise exercise = new Exercise(exerciseName, firstParameter, secondParameter);
         
         return exercise;
@@ -140,7 +146,7 @@ public class SheetRoutineDao implements RoutineDao {
     }
     
     public List<String> getRoutineNames(String spreadsheetId) throws Exception {
-        List<Sheet> sheets = this.getWorkouts(spreadsheetId);
+        List<Sheet> sheets = this.getWorksheets(spreadsheetId);
         List<String> routineNames = new ArrayList<>();
         
         for (Sheet sheet : sheets) {
@@ -152,7 +158,7 @@ public class SheetRoutineDao implements RoutineDao {
     }
     
     public Integer getSheetIdBasedOnTitle(String sheetTitle, String spreadsheetId) throws Exception {
-        List<Sheet> sheets = this.getWorkouts(spreadsheetId);
+        List<Sheet> sheets = this.getWorksheets(spreadsheetId);
         
         for (Sheet sheet : sheets) {
             if (sheetTitle.equals(sheet.getProperties().getTitle())) {

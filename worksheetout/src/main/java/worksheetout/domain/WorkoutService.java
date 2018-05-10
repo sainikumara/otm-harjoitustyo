@@ -21,33 +21,16 @@ import worksheetout.domain.Routine;
  **/
 
 public class WorkoutService {
-    private Sheets sheetsService;
     private SheetRoutineDao routineDao;
     private SheetWorkoutSessionDao workoutSessionDao;
     private UserDao userDao;
     private User loggedIn;
     
     public WorkoutService(UserDao newUserDao, SheetRoutineDao newRoutineDao, SheetWorkoutSessionDao newWorkoutSessionDao) {
-//        try {
-//            setupSheetsService();
-//        } catch (Exception e) {
-//            System.out.println("Could not set up Sheets service. Error message: " + e);
-//        }
         this.routineDao = newRoutineDao;
         this.workoutSessionDao = newWorkoutSessionDao;
         this.userDao = newUserDao;
     }
-    
-//    /**
-//     * Setting up Google Sheets Service
-//     * @throws GeneralSecurityException
-//     * @throws IOException 
-//     */
-//    
-//    public void setupSheetsService() throws GeneralSecurityException, IOException {
-//        sheetsService = SheetsServiceUtil.getSheetsService();
-//    }
-
 
     /**
      * Saving a workout routine to Google Sheets
@@ -58,23 +41,29 @@ public class WorkoutService {
     public void routineToSheet(Routine routine, String spreadsheetId) {
         try {
             this.routineDao.save(routine, spreadsheetId);
-            System.out.println("\nYour routine has been saved on the spreadsheet with the id: " + spreadsheetId + "\n");
+            System.out.println("\nRoutine " + routine.getName() + " has been saved on the spreadsheet with the id: " + spreadsheetId + "\n");
         } catch (Exception e) {
             System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
         }
     }
     
-    public void addExerciseToRoutine(Exercise exercise, Routine routine) {
-        routine.addOneExercise(exercise);
+    public boolean addExerciseToRoutine(Exercise exercise, Routine routine) {
+        System.out.println("Trying to add exercise to routine");
+        try {
+            routine.addOneExercise(exercise);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
-    public Routine createRoutine(String name) {
+    public void createRoutine(String name) {
         Routine routine = new Routine(name);
-        return routine;
+        this.routineToSheet(routine, this.loggedIn.getSpreadsheetId());
     }
 
     public Exercise createExercise(String name, String parameter1, String parameter2) {
-        Exercise exercise = new Exercise(name, parameter1, parameter2);
+            Exercise exercise = new Exercise(name, parameter1, parameter2);
         return exercise;
     }
 
@@ -94,7 +83,7 @@ public class WorkoutService {
             System.out.println("SpreadsheetId: " + this.loggedIn.getSpreadsheetId());
             routines = this.routineDao.getRoutines(this.loggedIn.getSpreadsheetId());
         } catch (Exception e) {
-            
+            System.out.println("Exception in WorkoutService.getRoutines: " + e);
         }
 
         System.out.println("Routines: " + routines);

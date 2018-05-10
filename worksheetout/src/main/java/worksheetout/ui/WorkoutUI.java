@@ -50,8 +50,10 @@ import worksheetout.domain.WorkoutService;
 public class WorkoutUI extends Application {
     private WorkoutService workoutService;
     private Sheets sheetsService;
-    private Scene routineScene;
-    private Scene sessionScene;
+    private Scene routinesScene;
+    private Scene sessionsScene;
+    private Scene modifyRoutineScene;
+    private Scene addSessionScene;
     private Scene newUserScene;
     private Scene loginScene;
     
@@ -99,13 +101,16 @@ public class WorkoutUI extends Application {
         HBox box = new HBox(10);
         Label label  = new Label(routine.getName());
         label.setMinHeight(28);
+        System.out.println("Routine in createSessionNode " + routine.getName());
         Button sessionButton = new Button("Add a session");
         sessionButton.setOnAction(e -> {
-            primaryStage.setScene(this.sessionScene);
+            primaryStage.setScene(this.addSessionScene);
         });
+        
         Button routineButton = new Button("Add exercises");
         routineButton.setOnAction(e -> {
-            primaryStage.setScene(this.routineScene);
+            primaryStage.setScene(this.modifyRoutineScene);
+            modifyRoutineView(routine, primaryStage);
         });
                 
         Region spacer = new Region();
@@ -117,12 +122,71 @@ public class WorkoutUI extends Application {
     }
     
     public void redrawRoutineList(Stage primaryStage) {
-        routineNodes.getChildren().clear();     
+        if (workoutService.getLoggedUser() == null) {
+            return;
+        }
+        routineNodes.getChildren().clear();
 
         List<Routine> routines = workoutService.getRoutines();
         routines.forEach(routine -> {
             routineNodes.getChildren().add(createSessionNode(routine, primaryStage));
-        });     
+        });
+    }
+    
+    public void modifyRoutineView(Routine routine, Stage primaryStage) {
+        System.out.println("Starting modifyRoutineView");
+        VBox modifyRoutinePane = new VBox(10);
+        
+//        HBox newExerciseNamePane = new HBox(10);
+//        newExerciseNamePane.setPadding(new Insets(10));
+//        TextField newExerciseNameInput = new TextField(); 
+//        Label newExerciseNameLabel = new Label("Exercise name");
+//        newExerciseNameLabel.setPrefWidth(100);
+//        newExerciseNamePane.getChildren().addAll(newExerciseNameLabel, newExerciseNameInput);
+//     
+//        HBox firstParameterPane = new HBox(10);
+//        firstParameterPane.setPadding(new Insets(10));
+//        TextField firstParameterInput = new TextField();
+//        Label firstParameterLabel = new Label("first parameter (eg. kg, speed)");
+//        firstParameterLabel.setPrefWidth(20);
+//        firstParameterPane.getChildren().addAll(firstParameterLabel, firstParameterInput);        
+//        
+//        HBox secondParameterPane = new HBox(10);
+//        secondParameterPane.setPadding(new Insets(10));
+//        TextField secondParameterInput = new TextField();
+//        Label secondParameterLabel = new Label("second parameter (eg. repetitions, minutes)");
+//        secondParameterLabel.setPrefWidth(20);
+//        secondParameterPane.getChildren().addAll(secondParameterLabel, secondParameterInput);        
+//        
+//        Label exerciseCreationMessage = new Label();
+//        
+//        Button createExerciseButton = new Button("create");
+//        createExerciseButton.setPadding(new Insets(10));
+//
+//        createExerciseButton.setOnAction(e -> {
+//            String exerciseName = newExerciseNameInput.getText();
+//            String firstParameter = firstParameterInput.getText();
+//            String secondParameter = secondParameterInput.getText();
+//   
+//            if (exerciseName.length() < 2) {
+//                exerciseCreationMessage.setText("exercise name too short");
+//                exerciseCreationMessage.setTextFill(Color.RED);
+//            } else if (workoutService.addExerciseToRoutine(workoutService.createExercise(exerciseName, firstParameter, secondParameter), routine)) {
+//                exerciseCreationMessage.setText("new exercise created");
+//                exerciseCreationMessage.setTextFill(Color.GREEN);               
+//                modifyRoutineView(routine, primaryStage);
+//                primaryStage.setScene(modifyRoutineScene);
+//            } else {
+//                exerciseCreationMessage.setText("the exercise takes a name and two parameters");
+//                exerciseCreationMessage.setTextFill(Color.RED);
+//            }
+//        });
+        
+        Label label  = new Label(routine.toString());
+        
+        modifyRoutinePane.getChildren().addAll(label); 
+       
+        modifyRoutineScene = new Scene(modifyRoutinePane, 500, 500);
     }
     
     @Override
@@ -146,7 +210,7 @@ public class WorkoutUI extends Application {
             if (workoutService.login(username)){
                 loginMessage.setText("");
                 redrawRoutineList(primaryStage);
-                primaryStage.setScene(routineScene);  
+                primaryStage.setScene(routinesScene);  
                 usernameInput.setText("");
             } else {
                 loginMessage.setText("User does not exist");
@@ -174,12 +238,12 @@ public class WorkoutUI extends Application {
         newUsernameLabel.setPrefWidth(100);
         newUsernamePane.getChildren().addAll(newUsernameLabel, newUsernameInput);
      
-        HBox newNamePane = new HBox(10);
-        newNamePane.setPadding(new Insets(10));
+        HBox spreadsheetIdPane = new HBox(10);
+        spreadsheetIdPane.setPadding(new Insets(10));
         TextField spreadsheetIdInput = new TextField();
         Label newSpreadsheetIdLabel = new Label("spreadsheet id");
         newSpreadsheetIdLabel.setPrefWidth(100);
-        newNamePane.getChildren().addAll(newSpreadsheetIdLabel, spreadsheetIdInput);        
+        spreadsheetIdPane.getChildren().addAll(newSpreadsheetIdLabel, spreadsheetIdInput);        
         
         Label userCreationMessage = new Label();
         
@@ -196,25 +260,22 @@ public class WorkoutUI extends Application {
             } else if (workoutService.createUser(username, spreadsheetId)) {
                 userCreationMessage.setText("");
                 loginMessage.setText("new user created");
-                loginMessage.setTextFill(Color.GREEN);
-                
+                loginMessage.setTextFill(Color.GREEN);               
                 primaryStage.setScene(loginScene);
             } else {
                 userCreationMessage.setText("username has to be unique");
                 userCreationMessage.setTextFill(Color.RED);
             }
- 
-        });  
+        });
         
-        newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, createNewUserButton); 
-       
+        newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, spreadsheetIdPane, createNewUserButton); 
         newUserScene = new Scene(newUserPane, 500, 500);
         
         // main scene
         
         ScrollPane workoutScrollbar = new ScrollPane();       
         BorderPane mainPane = new BorderPane(workoutScrollbar);
-        routineScene = new Scene(mainPane, 500, 500);
+        routinesScene = new Scene(mainPane, 500, 500);
                 
         HBox menuPane = new HBox(10);    
         Region menuSpacer = new Region();
@@ -227,11 +288,11 @@ public class WorkoutUI extends Application {
         });        
         
         HBox createForm = new HBox(10);    
-        Button createRoutine = new Button("create");
+        Button createRoutineButton = new Button("Add new routine");
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         TextField newRoutineInput = new TextField();
-        createForm.getChildren().addAll(newRoutineInput, spacer, createRoutine);
+        createForm.getChildren().addAll(newRoutineInput, spacer, createRoutineButton);
         
         routineNodes = new VBox(10);
         routineNodes.setMaxWidth(480);
@@ -242,18 +303,21 @@ public class WorkoutUI extends Application {
         mainPane.setBottom(createForm);
         mainPane.setTop(menuPane);
         
-        createRoutine.setOnAction(e->{
-//            workoutService.createRoutine(newRoutineInput.getText());
-            newRoutineInput.setText("");       
+        createRoutineButton.setOnAction(e -> {
+            workoutService.createRoutine(newRoutineInput.getText());
+            newRoutineInput.setText("");
             redrawRoutineList(primaryStage);
         });
         
+        // new modifyRoutineScene
+        
+        
         // seutp primary stage
         
-        primaryStage.setTitle("Workouts");
+        primaryStage.setTitle("worksheetout");
         primaryStage.setScene(loginScene);
         primaryStage.show();
-        primaryStage.setOnCloseRequest(e->{
+        primaryStage.setOnCloseRequest(e -> {
             System.out.println("closing");
             System.out.println(workoutService.getLoggedUser());
         });
