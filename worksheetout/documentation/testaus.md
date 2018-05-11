@@ -40,4 +40,5 @@ Kaikki [määrittelydokumentin](https://github.com/sainikumara/otm-harjoitustyo/
 
 Sovellus ei anna tällä hetkellä järkeviä virheilmoituksia, seuraavissa tilanteissa
 - käyttäjä ei anna toimivaa Google spreadsheet id:tä, jonka muokkaamiseen hänellä on oikeudet
+
 Sovellus näyttää ajoittain näkymiä kokonaan mustina siirryttyään niihin. Tähän auttaa usein hiirellä kliksuttelu, jolloin tarpeellisia kenttiä ilmestyy näkyviin.
