@@ -32,7 +32,7 @@ _WorkoutService_ pääsee käsiksi harjoituksiin, harjoitusohjelmiin ja harjoitu
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/otm-project-class-diagram.png" width="450">
 
 ## Tietojen pysyväistallennus
-Pakkauksen _worksheetout.dao_ luokat _RoutineDao_, _SheetRoutineDao_, _WorkoutSessionDao_ ja _SheetWorkoutSessionDao_ huolehtivat tietojen tallettamisesta tiedostoihin.
+Pakkauksen _worksheetout.dao_ luokat _RoutineDao_, _SheetRoutineDao_, _WorkoutSessionDao_ ja _SheetWorkoutSessionDao_ huolehtivat tietojen tallettamisesta tiedostoihin. _SheetsServiceUtil_ ja _GoogleAuthorizeUtil_ huolehtivat yhteyden saamisesta Google Sheets APIin.
 
 ## Päätoiminnallisuudet
 ### Harjoitusohjelman ja harjoituksen luominen
