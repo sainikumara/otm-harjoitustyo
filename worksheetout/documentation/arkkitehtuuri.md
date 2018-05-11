@@ -10,6 +10,16 @@ Pakkaus _worksheetout.ui_ sisältää graafisen käyttöliittymän, _worksheetou
 ## Käyttöliittymä
 Käyttöliittymä on melko yksinkertainen graafinen käyttöliittymä, joka koostuu yhteensä seitsemästä erilaisesta näkymästä. Näiden lisäksi käyttäjän pitää luoda erikseen Google Sheetsiin dokumentti ja antaa sen id ohjelmalle, sekä antaa ohjelman käynnistyessä sille oikeus muokata omia Google Sheets-dokumentteja.
 
+Näkymät ovat seuraavat:
+
+- Käyttäjätunnuksen luominen
+- Kirjautuminen
+- Harjoitusohjelmalistaus
+- Harjoitusten lisäämisnäkymä
+- Harjoituskertojen listaus
+- Harjoituskerran lisäys
+- Harjoituskerran tarkastelu
+
 Käyttöliittymä kutsuu workoutService-olion metodeja, joiden avulla käyttäjän syöttämät tiedot tallennetaan.
 
 ## Sovelluslogiikka
