@@ -5,10 +5,10 @@ Ohjelman rakenne noudattelee kolmitasoista kerrosarkkitehtuuria, ja koodin pakka
 
 <img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/package-diagram.png" width="160">
 
-Pakkaus _worksheetout.ui_ sisältää tekstikäyttöliittymän, _worksheetout.domain_ sovelluslogiikan ja _worksheetout.dao_ tietojen tallennuksesta vastaavan koodin.
+Pakkaus _worksheetout.ui_ sisältää graafisen käyttöliittymän, _worksheetout.domain_ sovelluslogiikan ja _worksheetout.dao_ tietojen tallennuksesta vastaavan koodin.
 
 ## Käyttöliittymä
-Käyttöliittymä on yksinkertainen tekstikäyttöliittymä, joka pyytää käyttäjä syöttämään ensin omat tietonsa, sitten harjoitusohjelman tiedot ja sitten harjoitusohjelmaan liittyvien harjoituskertojen tiedot.
+Käyttöliittymä on melko yksinkertainen graafinen käyttöliittymä, joka koostuu yhteensä seitsemästä erilaisesta näkymästä. Näiden lisäksi käyttäjän pitää luoda erikseen Google Sheetsiin dokumentti ja antaa sen id ohjelmalle, sekä antaa ohjelman käynnistyessä sille oikeus muokata omia Google Sheets-dokumentteja.
 
 Käyttöliittymä kutsuu workoutService-olion metodeja, joiden avulla käyttäjän syöttämät tiedot tallennetaan.
 
