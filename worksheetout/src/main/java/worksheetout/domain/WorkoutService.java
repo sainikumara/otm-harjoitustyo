@@ -3,21 +3,23 @@ package worksheetout.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import worksheetout.dao.RoutineDao;
 import worksheetout.dao.SheetRoutineDao;
 import worksheetout.dao.SheetWorkoutSessionDao;
 import worksheetout.dao.UserDao;
+import worksheetout.dao.WorkoutSessionDao;
 
 /**
  * The class responsible for the logic of the application
  **/
 
 public class WorkoutService {
-    private SheetRoutineDao routineDao;
-    private SheetWorkoutSessionDao workoutSessionDao;
+    private RoutineDao routineDao;
+    private WorkoutSessionDao workoutSessionDao;
     private UserDao userDao;
     private User loggedIn;
     
-    public WorkoutService(UserDao newUserDao, SheetRoutineDao newRoutineDao, SheetWorkoutSessionDao newWorkoutSessionDao) {
+    public WorkoutService(UserDao newUserDao, RoutineDao newRoutineDao, WorkoutSessionDao newWorkoutSessionDao) {
         this.routineDao = newRoutineDao;
         this.workoutSessionDao = newWorkoutSessionDao;
         this.userDao = newUserDao;
