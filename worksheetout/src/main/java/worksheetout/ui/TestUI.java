@@ -89,13 +89,13 @@ public class TestUI {
         System.out.println("Tell about your session in (integer) numbers");
                 
         for (Exercise exercise : workoutSession.getRoutine().getExercises()) {
-            List<Integer> parameterValues = new ArrayList<>();           
+            List<Double> parameterValues = new ArrayList<>();           
             
             System.out.print(exercise.getName() + ", " + exercise.getParameters().get(0) + ": ");
-            int parameter1Value = Integer.parseInt(scanner.nextLine());
+            double parameter1Value = Double.parseDouble(scanner.nextLine());
             parameterValues.add(parameter1Value);
             System.out.print(exercise.getName() + ", " + exercise.getParameters().get(1) + ": ");
-            int parameter2Value = Integer.parseInt(scanner.nextLine());
+            double parameter2Value = Double.parseDouble(scanner.nextLine());
             parameterValues.add(parameter2Value);
             
             workoutSession.addOneDoneExercise(exercise.getName(), parameterValues);

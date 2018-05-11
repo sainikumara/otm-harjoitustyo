@@ -29,11 +29,6 @@ public class SheetRoutineDao implements RoutineDao {
         this.spreadsheet = null;
     }
     
-    public Sheets getSheetsService() {
-        return this.sheetsService;
-    }
-    
-    
     /**
      * Save a workout routine to a Google Sheets document
      * @param routine

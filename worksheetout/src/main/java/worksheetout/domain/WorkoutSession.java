@@ -53,8 +53,8 @@ public class WorkoutSession {
         values.add(sessionDate);
         
         for (DoneExercise exercise : this.sessionContents) {
-            values.add(Integer.toString(exercise.getParameterValue(exercise.getParameters().get(0))));
-            values.add(Integer.toString(exercise.getParameterValue(exercise.getParameters().get(1))));
+            values.add(Double.toString(exercise.getParameterValue(exercise.getParameters().get(0))));
+            values.add(Double.toString(exercise.getParameterValue(exercise.getParameters().get(1))));
         }
         
         return values;
@@ -66,7 +66,7 @@ public class WorkoutSession {
      * @param parameterValues   values of the parameters of the exercise
      */
     
-    public void addOneDoneExercise(String name, List<Integer> parameterValues) {
+    public void addOneDoneExercise(String name, List<Double> parameterValues) {
         Exercise exercise = this.routine.getOneExercise(name);
         DoneExercise doneExercise = new DoneExercise(exercise, parameterValues);
         this.sessionContents.add(doneExercise);

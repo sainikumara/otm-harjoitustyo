@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class DoneExercise extends Exercise {
 
-    private Map<String, Integer> parameterValues = new HashMap<>();
+    private Map<String, Double> parameterValues = new HashMap<>();
     
-    public DoneExercise(Exercise exercise, List<Integer> values) {
+    public DoneExercise(Exercise exercise, List<Double> values) {
         super(exercise.getName(), exercise.getParameters().get(0), exercise.getParameters().get(1));
         
         for (int i = 0; i < super.getParameters().size(); i++) {
@@ -20,16 +20,16 @@ public class DoneExercise extends Exercise {
         }
     }
     
-    public void setParameterValue(String parameterName, int value) {
+    public void setParameterValue(String parameterName, double value) {
         this.parameterValues.put(parameterName, value);
     }
     
-    public int getParameterValue(String parameterName) {
-        return this.parameterValues.getOrDefault(parameterName, -1);
+    public double getParameterValue(String parameterName) {
+        return this.parameterValues.getOrDefault(parameterName, -1.0);
     }
     
     
-    public Map<String, Integer> getParameterValues() {
+    public Map<String, Double> getParameterValues() {
         return this.parameterValues;
     }
 

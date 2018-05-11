@@ -38,14 +38,14 @@ public class WorkoutSessionTest {
         }
         session = new WorkoutSession(date, routine);
         
-        List<Integer> valuesCalf = new ArrayList<>();
-        valuesCalf.add(70);
-        valuesCalf.add(30);
+        List<Double> valuesCalf = new ArrayList<>();
+        valuesCalf.add(70.0);
+        valuesCalf.add(30.0);
         DoneExercise doneCalfRaise = new DoneExercise(calfRaise, valuesCalf);
         
-        List<Integer> valuesSquat = new ArrayList<>();
-        valuesSquat.add(40);
-        valuesSquat.add(20);
+        List<Double> valuesSquat = new ArrayList<>();
+        valuesSquat.add(40.0);
+        valuesSquat.add(20.0);
         DoneExercise doneSquat = new DoneExercise(squat, valuesSquat);
         
         doneExercises = new ArrayList<>();
@@ -102,19 +102,19 @@ public class WorkoutSessionTest {
         
         List<String> values = new ArrayList<>();
         values.add("2018-05-02");
-        values.add("70");
-        values.add("30");
-        values.add("40");
-        values.add("20");
+        values.add("70.0");
+        values.add("30.0");
+        values.add("40.0");
+        values.add("20.0");
         
         assertEquals(session.getDateAndExerciseParameterValues(), values);
     }
     
     @Test
     public void addOneDoneExerciseWorks() {
-        List<Integer> valuesSquat = new ArrayList<>();
-        valuesSquat.add(88);
-        valuesSquat.add(10);
+        List<Double> valuesSquat = new ArrayList<>();
+        valuesSquat.add(88.0);
+        valuesSquat.add(10.0);
         session.addOneDoneExercise("squat", valuesSquat);
         
         Exercise squat = new Exercise("squat", "kg", "repetitions");
@@ -161,6 +161,6 @@ public class WorkoutSessionTest {
     @Test
     public void toStringWorks() {
         session.setSessionContents(doneExercises);
-        assertEquals(session.toString(), "Wed May 02 00:00:00 EEST 2018: \ncalf raise: {kg=70, repetitions=30}\nsquat: {kg=40, repetitions=20}\n");
+        assertEquals(session.toString(), "Wed May 02 00:00:00 EEST 20.018: \ncalf raise: {kg=70.0, repetitions=30.0}\nsquat: {kg=40.0, repetitions=20.0}\n");
     }
 }
