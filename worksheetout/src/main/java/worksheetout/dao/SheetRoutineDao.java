@@ -73,7 +73,6 @@ public class SheetRoutineDao implements RoutineDao {
         this.setSpreadsheet(spreadsheetId);
         
         List<Sheet> sheets = this.spreadsheet.getSheets();
-        System.out.println("Sheets: " + sheets);
         return sheets;
     }
     

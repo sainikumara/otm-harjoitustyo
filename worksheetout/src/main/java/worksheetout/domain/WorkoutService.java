@@ -48,13 +48,27 @@ public class WorkoutService {
     }
     
     public boolean addExerciseToRoutine(Exercise exercise, Routine routine) {
-        System.out.println("Trying to add exercise to routine");
+        if (exercise == null) {
+            return false;
+        }
+        
+        System.out.println("Trying to add exercise " + exercise.getName() + " to routine " + routine.getName());
         try {
             routine.addOneExercise(exercise);
         } catch (Exception e) {
             return false;
         }
         return true;
+    }
+    
+    public List<Exercise> getExercisesOfRoutine(Routine routine) {
+        List<Exercise> exercises = new ArrayList<>();
+        try {
+            exercises = this.routineDao.getExercises(routine.getName(), this.loggedIn.getSpreadsheetId());
+        } catch (Exception e) {
+            return null;
+        }
+        return exercises;
     }
 
     public void createRoutine(String name) {
@@ -63,7 +77,10 @@ public class WorkoutService {
     }
 
     public Exercise createExercise(String name, String parameter1, String parameter2) {
-            Exercise exercise = new Exercise(name, parameter1, parameter2);
+        if (name == null || name.isEmpty() || parameter1 == null || parameter1.isEmpty() || parameter2 == null || parameter2.isEmpty()) {
+            return null;
+        }
+        Exercise exercise = new Exercise(name, parameter1, parameter2);
         return exercise;
     }
 
