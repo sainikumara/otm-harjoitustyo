@@ -17,6 +17,9 @@ java -jar todoapp.jar
 ## Kirjautuminen
 Käynnistyessään ohjelma vaatii käyttäjää kirjautumaan sisään Google-tilille ja antamaan sitä kautta oikeuden muokata tämän omia Google Sheets -tiedostoja. Käyttäjän on luotava Google spreadsheet id ja annettava sen tunnus ohjelmalle. Ensimmäisellä kirjautumiskerralla käyttän on luotava tunnus, jolloin ohjelma tallettaa käyttäjän antaman nimimerkin ja spreadsheet id:n. Tämän jälkeen kirjautuminen tapahtuu tällä nimimerkillä. Salasanoja ei tarvita, koska käyttäjän on joka kerta ohjelman käynnistyessä annettava sille erikseen lupa päästä käsiksi spreadsheet-tiedostoonsa.
 
+<img src="https://github.com/sainikumara/otm-harjoitustyo/blob/master/worksheetout/documentation/spreadsheetId.png" width="800">
+Kuvan keskellä kenoviivojen välissä oleva pitkä merkkijono on erään spreadsheetin id.
+
 ## Sovelluksen käyttö
 Kirjautumisen jälkeen käyttäjä pääsee näkymään, jossa ei aluksi ole muuta sisältöä kuin logout-nappi ja mahdollisuus lisätä uusia harjoitusohjelmia. Harjoitusohjelmia lisättäessä tulevat ne näkyviin näkymän keskelle. Kunkin harjoitusohjelman nimen oikealla puolella on nappi harjoitteiden lisäämistä varten ja toinen nappi, josta pääsee tarkastelemaan tähän harjoitusohjelmaan liittyviä harjoituskertoja.
 
