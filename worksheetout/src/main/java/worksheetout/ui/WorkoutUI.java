@@ -67,7 +67,7 @@ public class WorkoutUI extends Application {
         
         File config = new File("config.properties");
         
-        if(!config.exists()) {
+        if (!config.exists()) {
             config.createNewFile();
             Path path = Paths.get("config.properties");
             Files.write(path, Arrays.asList("userFile=users.txt"), Charset.forName("UTF-8"));
@@ -115,7 +115,7 @@ public class WorkoutUI extends Application {
                 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        box.setPadding(new Insets(0,5,0,5));
+        box.setPadding(new Insets(0, 5, 0, 5));
         
         box.getChildren().addAll(label, spacer, routineButton, sessionButton);
         return box;
@@ -149,7 +149,7 @@ public class WorkoutUI extends Application {
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        box.setPadding(new Insets(0,5,0,5));
+        box.setPadding(new Insets(0, 5, 0, 5));
         
         box.getChildren().addAll(exerciseName, spacer, firstParameter, secondParameter);
         return box;
@@ -190,7 +190,7 @@ public class WorkoutUI extends Application {
         menuPane.setPadding(new Insets(10));
         Label routineNameLabel = new Label(routine.getName());
         VBox menuLabelAndRoutineLabel = new VBox(2);
-        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel,routineNameLabel);
+        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel, routineNameLabel);
         Region menuSpacer = new Region();
         HBox.setHgrow(menuSpacer, Priority.ALWAYS);
         Button logoutButton = new Button("Logout");
@@ -288,7 +288,7 @@ public class WorkoutUI extends Application {
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        box.setPadding(new Insets(0,5,0,5));
+        box.setPadding(new Insets(0, 5, 0, 5));
         
         Button viewSessionButton = new Button("View session");
         viewSessionButton.setPadding(new Insets(10));
@@ -326,7 +326,7 @@ public class WorkoutUI extends Application {
         menuPane.setPadding(new Insets(10));
         Label routineNameLabel = new Label(routine.getName());
         VBox menuLabelAndRoutineLabel = new VBox(2);
-        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel,routineNameLabel);
+        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel, routineNameLabel);
         Region menuSpacer = new Region();
         HBox.setHgrow(menuSpacer, Priority.ALWAYS);
         Button logoutButton = new Button("Logout");
@@ -411,7 +411,7 @@ public class WorkoutUI extends Application {
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        box.setPadding(new Insets(0,5,0,5));
+        box.setPadding(new Insets(0, 5, 0, 5));
         
         box.getChildren().addAll(exerciseName, spacer, firstParameter, firstParameterValue, secondParameter, secondParameterValue);
         return box;
@@ -523,7 +523,7 @@ public class WorkoutUI extends Application {
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        box.setPadding(new Insets(0,5,0,5));
+        box.setPadding(new Insets(0, 5, 0, 5));
         
         Button addDoneExerciseButton = new Button("Add");
         addDoneExerciseButton.setPadding(new Insets(10));
@@ -535,7 +535,7 @@ public class WorkoutUI extends Application {
             String firstParameterValue = firstParameterInput.getText();
             String secondParameterValue = secondParameterInput.getText();
             
-            if(this.workoutService.addDoneExerciseToSession(session, exercise, firstParameterValue, secondParameterValue)) {
+            if (this.workoutService.addDoneExerciseToSession(session, exercise, firstParameterValue, secondParameterValue)) {
                 createDoneExerciseMessage.setText("The values has been added to the workout session");
                 createDoneExerciseMessage.setTextFill(Color.GREEN);
             } else {
@@ -583,7 +583,7 @@ public class WorkoutUI extends Application {
         menuPane.setPadding(new Insets(10));
         Label routineNameLabel = new Label(routine.getName() + ": " + this.workoutService.dateToString(session.getDate()));
         VBox menuLabelAndRoutineLabel = new VBox(2);
-        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel,routineNameLabel);
+        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel, routineNameLabel);
         Region menuSpacer = new Region();
         HBox.setHgrow(menuSpacer, Priority.ALWAYS);
         Button logoutButton = new Button("Logout");
@@ -644,7 +644,7 @@ public class WorkoutUI extends Application {
         loginButton.setOnAction(e -> {
             String username = usernameInput.getText();
             menuLabel.setText("Logged in: " + username);
-            if (this.workoutService.login(username)){
+            if (this.workoutService.login(username)) {
                 loginMessage.setText("");
                 redrawRoutineList(primaryStage);
                 primaryStage.setScene(this.routinesScene);  
@@ -722,7 +722,7 @@ public class WorkoutUI extends Application {
         logoutButton.setPadding(new Insets(10));
         menuPane.getChildren().addAll(menuLabel, menuSpacer, logoutButton);
         
-        logoutButton.setOnAction(e->{
+        logoutButton.setOnAction(e -> {
             this.workoutService.logout();
             primaryStage.setScene(this.loginScene);
         });        
@@ -765,7 +765,7 @@ public class WorkoutUI extends Application {
 
     @Override
     public void stop() {
-      System.out.println("the program is closing");
+        System.out.println("the program is closing");
     }    
     
     public static void main(String[] args) {

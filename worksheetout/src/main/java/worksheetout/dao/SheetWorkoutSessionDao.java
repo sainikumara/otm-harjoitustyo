@@ -65,14 +65,14 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
                 WorkoutSession session = this.getOneSession(rows.get(i), routine);
                 sessions.add(session);
             }
-	}
+        }
         return sessions;
     }
     
     private WorkoutSession getOneSession(List<Object> row, Routine routine) throws Exception {
         WorkoutSession session = new WorkoutSession(this.parseStringToDate(row.get(0).toString()), routine);
         for (int i = 1; i <= routine.getExerciseParameters().size(); i = i + 2) {
-            Exercise exercise = routine.getExercises().get((i-1)/2);
+            Exercise exercise = routine.getExercises().get((i - 1) / 2);
             List<Double> parameterValues = null;
             try {
                 parameterValues = this.parseDoubleValues(row.get(i), row.get(i + 1));

@@ -198,7 +198,7 @@ public class WorkoutService {
         User user = new User(username, spreadsheetId);
         try {
             this.userDao.create(user);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
 

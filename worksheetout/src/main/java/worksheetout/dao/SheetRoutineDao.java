@@ -105,7 +105,7 @@ public class SheetRoutineDao implements RoutineDao {
                 Exercise exercise = this.getOneExercise(columns.get(i), columns.get(i + 1));
                 exercises.add(exercise);
             }
-	}
+        }
         return exercises;
     }
     
