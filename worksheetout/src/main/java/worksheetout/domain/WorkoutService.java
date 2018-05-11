@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import worksheetout.dao.RoutineDao;
 import worksheetout.dao.SheetRoutineDao;
@@ -103,7 +104,6 @@ public class WorkoutService {
             System.out.println("Exception in WorkoutService.getRoutines: " + e);
         }
 
-        System.out.println("Routines: " + routines);
         return routines;
     }
 
@@ -120,6 +120,21 @@ public class WorkoutService {
         } catch (Exception e) {
             System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
         }
+    }
+    
+    public List<WorkoutSession> getWorkoutSessions(Routine routine) {
+        List<WorkoutSession> sessions = new ArrayList<>();
+        try {
+            sessions = this.workoutSessionDao.getWorkoutSessions(routine, this.loggedIn.getSpreadsheetId());
+        } catch (Exception e) {
+            return null;
+        }
+        System.out.println("Sessions in getWorkoutSessions: " + sessions);
+        return sessions;
+    }
+    
+    public String dateToString(Date date) {
+        return this.workoutSessionDao.parseDateToString(date);
     }
 
     /**
