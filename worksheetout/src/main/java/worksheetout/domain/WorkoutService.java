@@ -38,6 +38,12 @@ public class WorkoutService {
         }
     }
     
+    /**
+     * Add one exercise to a routine
+     * @param exercise exercise to be added
+     * @param routine routine in which the exercise is added
+     * @return truea id adding successful, false if not
+     */
     public boolean addExerciseToRoutine(Exercise exercise, Routine routine) {
         if (exercise == null) {
             return false;
@@ -50,6 +56,11 @@ public class WorkoutService {
         return true;
     }
     
+    /**
+     * Get the exercises that have been added to a routine
+     * @param routine the routine in which the exercises have been added
+     * @return the exercises as a list if successful, null otherwise
+     */
     public List<Exercise> getExercisesOfRoutine(Routine routine) {
         List<Exercise> exercises = new ArrayList<>();
         try {
@@ -60,11 +71,22 @@ public class WorkoutService {
         return exercises;
     }
 
+    /**
+     * Create a routine
+     * @param name the name for the routine
+     */
     public void createRoutine(String name) {
         Routine routine = new Routine(name);
         this.routineToSheet(routine, this.loggedIn.getSpreadsheetId());
     }
 
+    /**
+     * Create one exercise
+     * @param name name of the exercise as String
+     * @param parameter1 first parameter of the exercise as String
+     * @param parameter2 second parameter of the exercise as String
+     * @return the created exercise if successful, null otherwise
+     */
     public Exercise createExercise(String name, String parameter1, String parameter2) {
         if (name == null || name.isEmpty() || parameter1 == null || parameter1.isEmpty() || parameter2 == null || parameter2.isEmpty()) {
             return null;
@@ -73,6 +95,11 @@ public class WorkoutService {
         return exercise;
     }
 
+    /**
+     * Get the names of the routines that have been saved in a spreadsheet
+     * @param spreadsheetId if of the spreadsheet
+     * @return the names as a list
+     */
     public List<String> getRoutineNames(String spreadsheetId) {
         List<String> routineNames = new ArrayList<>();
         try {
@@ -83,6 +110,10 @@ public class WorkoutService {
         return routineNames;
     }
 
+    /**
+     * Get all the routines that have been saved in a spreadsheet
+     * @return the routines as a list
+     */
     public List<Routine> getRoutines() {
         List<Routine> routines = new ArrayList<>();
         try {
@@ -106,6 +137,14 @@ public class WorkoutService {
         }
     }
     
+    /**
+     * Add one DoneExercise to a WorkoutSession
+     * @param session the WorkoutSession in which to add the DoneExercise
+     * @param exercise the exercise based on which the DoneExercise will be created
+     * @param firstParameterValue value of the first parameter of the DoneExercise
+     * @param secondParameterValue value of the second parameter of the DoneExercise
+     * @return true if successful, false if not
+     */
     public boolean addDoneExerciseToSession(WorkoutSession session, Exercise exercise, String firstParameterValue, String secondParameterValue) {
         List<Double> parameterValues = new ArrayList<>();
         try {
@@ -118,6 +157,12 @@ public class WorkoutService {
         return true;
     }
     
+    /**
+     * Create a new WorkoutSession
+     * @param dateAsString the date of the workout session as a string formed as "yyyy-mm-dd"
+     * @param routine the routine that the exercise session is based on
+     * @return the created WorkoutSession if successful, otherwise null
+     */
     public WorkoutSession createWorkoutSession(String dateAsString, Routine routine) {
         Date date = null;
         try {
@@ -132,6 +177,11 @@ public class WorkoutService {
         }
     }
     
+    /**
+     * Get all the WorkoutSessions for a routine
+     * @param routine the routine on which the sessions are based
+     * @return the WorkoutSessions as a list if successful, null if not
+     */
     public List<WorkoutSession> getWorkoutSessions(Routine routine) {
         List<WorkoutSession> sessions = new ArrayList<>();
         try {

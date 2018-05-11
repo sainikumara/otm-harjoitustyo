@@ -52,6 +52,13 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
                 .setIncludeValuesInResponse(true).execute();
     }
     
+    /**
+     * Get the all WorkoutSessions that have been saved in a worksheet
+     * @param routine the routine on which the sessions are based
+     * @param spreadsheetId the id of the spreadsheet
+     * @return return the WorkoutSessions as a list id successfull, otherwise null
+     * @throws Exception 
+     */
     @Override
     public List<WorkoutSession> getWorkoutSessions(Routine routine, String spreadsheetId) throws Exception {
         List<List<Object>> rows = this.getSheetValues(routine.getName(), spreadsheetId);
@@ -68,6 +75,13 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
         return sessions;
     }
     
+    /**
+     * Pick the data needed to form one Session object, in order to get that Session
+     * @param row list of objects (that has been formed out of a row in a worksheet)
+     * @param routine the routine on which the session is based
+     * @return return one WorkoutSession object
+     * @throws Exception 
+     */
     private WorkoutSession getOneSession(List<Object> row, Routine routine) throws Exception {
         WorkoutSession session = new WorkoutSession(this.parseStringToDate(row.get(0).toString()), routine);
         for (int i = 1; i <= routine.getExerciseParameters().size(); i = i + 2) {
@@ -102,6 +116,13 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
         return parameterValues;
     }
     
+    /**
+     * Get all the data from a certain range in a spreadsheet, eg. a worksheet
+     * @param range the range of the desired data, in A1 format
+     * @param spreadsheetId the id of the spreadsheet
+     * @return a list of lists of objects, that is formed of the data saved in the rows within the range
+     * @throws Exception 
+     */
     public List<List<Object>> getSheetValues(String range, String spreadsheetId) throws Exception {
         ValueRange response = this.sheetsService.spreadsheets().values().get(spreadsheetId, range).setMajorDimension("ROWS").execute();
         List<List<Object>> rows = response.getValues();

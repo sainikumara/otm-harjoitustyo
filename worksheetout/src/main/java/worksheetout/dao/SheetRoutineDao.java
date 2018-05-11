@@ -41,6 +41,12 @@ public class SheetRoutineDao implements RoutineDao {
         this.saveExerciseNamesAndParameters(routine, spreadsheetId);
     }
     
+    /**
+     * Create a new worksheet in a Google spreadsheet, representing a routine and having the same name
+     * @param routineName the name of the routine that will be saved on the spreadsheet
+     * @param spreadsheetId the id of the spreadsheet in which to create the new worksheet
+     * @throws Exception 
+     */
     private void createNewSheet(String routineName, String spreadsheetId) throws Exception {
         if (this.getSheetIdBasedOnTitle(routineName, spreadsheetId) == null) {        
             List<Request> requests = new ArrayList<>();
@@ -50,6 +56,12 @@ public class SheetRoutineDao implements RoutineDao {
         }
     }
     
+    /**
+     * Save the names and parameters of the exercises in a routine on the worksheet that represents the routine
+     * @param routine the routine that the sheet represents, also the name of the worksheet on which to save the data
+     * @param spreadsheetId the id of the spreadsheet in which to save the data
+     * @throws Exception 
+     */
     private void saveExerciseNamesAndParameters(Routine routine, String spreadsheetId) throws Exception {
         List<ValueRange> data = new ArrayList<>();
         data.add(new ValueRange().setRange("'" + routine.getName() + "'!B1").setValues(Arrays.asList(Arrays.asList(routine.getExerciseNames().toArray()))));
@@ -64,6 +76,12 @@ public class SheetRoutineDao implements RoutineDao {
         this.spreadsheet = this.sheetsService.spreadsheets().get(spreadsheetId).execute();       
     }
     
+    /**
+     * Get all the worksheets in a Google spreadsheet
+     * @param spreadsheetId the id of the spreadsheet
+     * @return the worksheets as a list
+     * @throws Exception 
+     */
     @Override
     public List<Sheet> getWorksheets(String spreadsheetId) throws Exception {
         this.setSpreadsheet(spreadsheetId);
@@ -72,6 +90,12 @@ public class SheetRoutineDao implements RoutineDao {
         return sheets;
     }
     
+    /**
+     * Get all the routines that have been saved in a spreadsheet
+     * @param spreadsheetId the id of the spreadsheet
+     * @return the routines as a list
+     * @throws Exception 
+     */
     @Override
     public List<Routine> getRoutines(String spreadsheetId) throws Exception {
         List<Sheet> sheets = this.getWorksheets(spreadsheetId);
@@ -85,6 +109,13 @@ public class SheetRoutineDao implements RoutineDao {
         return routines;
     }
     
+    /**
+     * Get the routine that has been saved on a particular worksheet
+     * @param sheet the sheet from which to extract the routine's data
+     * @param spreadsheetId the id of the spreadsheet
+     * @return the routine from the worksheet
+     * @throws Exception 
+     */
     @Override
     public Routine getOneRoutine(Sheet sheet, String spreadsheetId) throws Exception {
         String routineName = sheet.getProperties().getTitle();
@@ -96,6 +127,13 @@ public class SheetRoutineDao implements RoutineDao {
         return routine;
     }
     
+    /**
+     * Get all the exercises in certain range, eg. a worksheet
+     * @param range the range from which to retrieve the data for the exercises, in A1 format
+     * @param spreadsheetId the id of the spreadsheet
+     * @return the exercises as a list
+     * @throws Exception 
+     */
     @Override
     public List<Exercise> getExercises(String range, String spreadsheetId) throws Exception {
         List<List<Object>> columns = this.getSheetValues(range, spreadsheetId);
@@ -114,6 +152,13 @@ public class SheetRoutineDao implements RoutineDao {
         return exercises;
     }
     
+    /**
+     * Pick the data needed to form one Exercise object, in order to get that Exercise
+     * @param column1 list of objects (that has been formed out of one column in a worksheet)
+     * @param column2 list of objects (that has been formed out of the column on the right hand side of column1)
+     * @return return one Exercise object
+     * @throws Exception 
+     */
     @Override
     public Exercise getOneExercise(List<Object> column1, List<Object> column2) throws Exception {
         String exerciseName = "";
@@ -133,6 +178,13 @@ public class SheetRoutineDao implements RoutineDao {
         return exercise;
     }
     
+    /**
+     * Get all the data from a certain range in a spreadsheet, eg. a worksheet
+     * @param range the range of the desired data, in A1 format
+     * @param spreadsheetId the id of the spreadsheet
+     * @return a list of lists of objects, that is formed of the data saved in the columns within the range
+     * @throws Exception 
+     */
     @Override
     public List<List<Object>> getSheetValues(String range, String spreadsheetId) throws Exception {
         ValueRange response = this.sheetsService.spreadsheets().values().get(spreadsheetId, range).setMajorDimension("COLUMNS").execute();
@@ -145,6 +197,13 @@ public class SheetRoutineDao implements RoutineDao {
         }
     }
     
+    
+    /**
+     * Get the names of all the routines that have been saved in a spreadsheet
+     * @param spreadsheetId the id of the spreadsheet
+     * @return return the names of the routines as a list
+     * @throws Exception 
+     */
     @Override
     public List<String> getRoutineNames(String spreadsheetId) throws Exception {
         List<Sheet> sheets = this.getWorksheets(spreadsheetId);
@@ -158,6 +217,13 @@ public class SheetRoutineDao implements RoutineDao {
         return routineNames;
     }
     
+    /**
+     * Get the id of the worksheet based on its title
+     * @param sheetTitle the title of a sheet
+     * @param spreadsheetId the id of the spreadsheet
+     * @return return the id of the worksheet if successful, null if not
+     * @throws Exception 
+     */
     @Override
     public Integer getSheetIdBasedOnTitle(String sheetTitle, String spreadsheetId) throws Exception {
         List<Sheet> sheets = this.getWorksheets(spreadsheetId);
