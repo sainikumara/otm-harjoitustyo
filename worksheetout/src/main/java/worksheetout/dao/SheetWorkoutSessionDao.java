@@ -17,7 +17,7 @@ import worksheetout.domain.WorkoutSession;
  * The class for handling the connection between WorkoutSessions and Google Sheets
  */
 
-public class SheetWorkoutSessionDao {
+public class SheetWorkoutSessionDao implements WorkoutSessionDao {
     private Sheets sheetsService;
     private Spreadsheet spreadsheet;
     private SheetRoutineDao routineDao;
@@ -40,6 +40,7 @@ public class SheetWorkoutSessionDao {
      * @throws Exception 
      */
     
+    @Override
     public void save(WorkoutSession session, String spreadsheetId) throws Exception {
         ValueRange appendBody = new ValueRange().setValues(Arrays.asList(Arrays.asList(session
                 .getDateAndExerciseParameterValues().toArray())));
@@ -51,6 +52,7 @@ public class SheetWorkoutSessionDao {
                 .setIncludeValuesInResponse(true).execute();
     }
     
+    @Override
     public List<WorkoutSession> getWorkoutSessions(Routine routine, String spreadsheetId) throws Exception {
         List<List<Object>> rows = this.getSheetValues(routine.getName(), spreadsheetId);
         if (rows == null) {
@@ -111,6 +113,7 @@ public class SheetWorkoutSessionDao {
         }
     }
 
+    @Override
     public Date parseStringToDate(String dateAsString) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -122,6 +125,7 @@ public class SheetWorkoutSessionDao {
         return date;
     }
     
+    @Override
     public String parseDateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateAsString = dateFormat.format(date);
