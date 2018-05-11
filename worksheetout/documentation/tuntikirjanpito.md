@@ -20,5 +20,5 @@
 | 8.5.  | 7    | Sheets -toiminnallisuuksia ja testien päivityksiä, User-uudistus, guin alku |
 | 9.5.  | 7    | User-uudistus, guin alku |
 | 10.5. | 10   | Guin jatkoa, fiksaus sheets apin cachetukseen |
-| 11.5. |      |  |
-| yht   | 80   | | 
+| 11.5. | 17   | Gui ja Google Sheetsin kanssa kommunikointi valmiiksi, testausta, debuggausta ja dokumentointia |
+| yht   | 97   | | 
