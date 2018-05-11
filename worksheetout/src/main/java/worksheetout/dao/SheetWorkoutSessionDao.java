@@ -1,7 +1,6 @@
 package worksheetout.dao;
 
 import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import com.google.api.services.sheets.v4.model.Spreadsheet;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import java.text.DateFormat;
@@ -18,7 +17,7 @@ import worksheetout.domain.WorkoutSession;
  * The class for handling the connection between WorkoutSessions and Google Sheets
  */
 
-public class SheetWorkoutSessionDao implements WorkoutSessionDao {
+public class SheetWorkoutSessionDao {
     private Sheets sheetsService;
     private Spreadsheet spreadsheet;
     private SheetRoutineDao routineDao;
@@ -41,12 +40,10 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
      * @throws Exception 
      */
     
-    @Override
     public void save(WorkoutSession session, String spreadsheetId) throws Exception {
         ValueRange appendBody = new ValueRange().setValues(Arrays.asList(Arrays.asList(session
                 .getDateAndExerciseParameterValues().toArray())));
-        System.out.println("'" + session.getRoutine().getName() + "'!A3");
-        System.out.println("TESTING");
+
         sheetsService.spreadsheets().values()
                 .append(spreadsheetId, "'" + session.getRoutine().getName() + "'!A3", appendBody)
                 .setValueInputOption("RAW")

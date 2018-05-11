@@ -371,8 +371,13 @@ public class WorkoutUI extends Application {
         mainPane.setTop(menuPane);
         
         createSessionButton.setOnAction(e -> {
-            String timesString = sessionTimeInput.getText();
-            WorkoutSession newSession = this.workoutService.createWorkoutSession(timesString, routine);
+            String dateAsString = sessionTimeInput.getText();
+            WorkoutSession newSession = null;
+            try {
+                newSession = this.workoutService.createWorkoutSession(dateAsString, routine);
+            } catch (Exception ex) {
+                newSession = null;
+            }
             if (newSession != null) {
                 createSessionLabel.setText("");
                 sessionTimeInput.setText("");
@@ -487,10 +492,16 @@ public class WorkoutUI extends Application {
         mainPane.setTop(menuPane);
         
         createSessionButton.setOnAction(e -> {
-            String timeString = sessionTimeInput.getText();
-
-            WorkoutSession newSession = this.workoutService.createWorkoutSession(timeString, routine);
+            String dateAsString = sessionTimeInput.getText();
+            WorkoutSession newSession = null;
+            try {
+                newSession = this.workoutService.createWorkoutSession(dateAsString, routine);
+            } catch (Exception ex) {
+                newSession = null;
+            }
             if (newSession != null) {
+                createSessionLabel.setText("");
+                sessionTimeInput.setText("");
                 this.addSessionView(routine, newSession, primaryStage);
                 this.redrawAddDoneExerciseList(routine, newSession);
                 primaryStage.setScene(this.addSessionScene);
@@ -606,10 +617,6 @@ public class WorkoutUI extends Application {
             primaryStage.setScene(this.sessionsScene);
             redrawSessionsList(routine, primaryStage);
         });
-        
-//        HBox labelBox = new HBox(10);
-//        labelBox.setPadding(new Insets(10));
-//        Label exerciseCreationMessage = new Label();
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);

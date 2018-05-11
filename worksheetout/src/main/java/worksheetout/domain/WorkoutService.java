@@ -120,6 +120,9 @@ public class WorkoutService {
         Date date = null;
         try {
             date = this.stringToDate(dateAsString);
+            if (date == null) {
+                return null;
+            }
             WorkoutSession session = new WorkoutSession(date, routine);
             return session;
         } catch (Exception e) {
@@ -138,7 +141,11 @@ public class WorkoutService {
     }
     
     public String dateToString(Date date) {
-        return this.workoutSessionDao.parseDateToString(date);
+        if (date != null) {
+            return this.workoutSessionDao.parseDateToString(date);
+        } else {
+            return "";
+        }
     }
     
     public Date stringToDate(String dateAsString) {
