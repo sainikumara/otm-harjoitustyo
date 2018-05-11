@@ -19,6 +19,8 @@ Treenien seurannan helpottamista varten rakennettu yksinkertainen sovellus.
 
 [Viikko 6](https://github.com/sainikumara/otm-harjoitustyo/releases/tag/v0.2-alpha)
 
+[Loppupalautus](https://github.com/sainikumara/otm-harjoitustyo/releases/tag/v0.3beta)
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
