@@ -161,6 +161,6 @@ public class WorkoutSessionTest {
     @Test
     public void toStringWorks() {
         session.setSessionContents(doneExercises);
-        assertEquals(session.toString(), "Wed May 02 00:00:00 EEST 20.018: \ncalf raise: {kg=70.0, repetitions=30.0}\nsquat: {kg=40.0, repetitions=20.0}\n");
+        assertEquals(session.toString(), "Wed May 02 00:00:00 EEST 2018: \ncalf raise: {kg=70.0, repetitions=30.0}\nsquat: {kg=40.0, repetitions=20.0}\n");
     }
 }

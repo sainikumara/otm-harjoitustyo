@@ -91,14 +91,12 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
     private List<Double> parseDoubleValues(Object object1, Object object2) {
         double parameterValue1;
         double parameterValue2;
-        
         try {
             parameterValue1 = Double.parseDouble(object1.toString());
             parameterValue2 = Double.parseDouble(object2.toString());
         } catch (Exception e) {
             return null;
         }
-        
         List<Double> parameterValues = new ArrayList<>();
         parameterValues.add(parameterValue1);
         parameterValues.add(parameterValue2);
@@ -116,14 +114,13 @@ public class SheetWorkoutSessionDao implements WorkoutSessionDao {
         }
     }
 
-
     public Date parseStringToDate(String dateAsString) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        Date date;
         try {
             date = dateFormat.parse(dateAsString);
         } catch (Exception e) {
-            System.out.println("There was an error parsing the date: " + e.getMessage());
+            return null;
         }
         return date;
     }

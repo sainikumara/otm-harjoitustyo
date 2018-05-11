@@ -3,7 +3,6 @@ package worksheetout.ui;
 import com.google.api.services.sheets.v4.Sheets;
 import java.io.FileInputStream;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -30,11 +29,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 
 import worksheetout.dao.FileUserDao;
 import worksheetout.dao.SheetRoutineDao;
@@ -44,7 +39,6 @@ import worksheetout.domain.DoneExercise;
 import worksheetout.domain.Exercise;
 import worksheetout.domain.Routine;
 import worksheetout.domain.WorkoutSession;
-import worksheetout.domain.User;
 import worksheetout.domain.WorkoutService;
 
 public class WorkoutUI extends Application {
@@ -86,7 +80,6 @@ public class WorkoutUI extends Application {
         try {
             setupSheetsService();
         } catch (Exception e) {
-            System.out.println("Could not set up Sheets service. Error message: " + e);
         }
 
         SheetRoutineDao routineDao = new SheetRoutineDao(this.sheetsService);
@@ -292,7 +285,6 @@ public class WorkoutUI extends Application {
         HBox box = new HBox(20);
         Label sessionDate  = new Label(this.workoutService.dateToString(session.getDate()));
         sessionDate.setMinHeight(28);
-        System.out.println("Session in oneSessionNode: " + session.getRoutine().getName() + " " + session.getDate().toString());
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -314,22 +306,10 @@ public class WorkoutUI extends Application {
             return;
         }
         List<WorkoutSession> sessionsOnSheet = this.workoutService.getWorkoutSessions(routine);
-//        List<WorkoutSession> exercisesInRoutine = routine.getExercises();
 
-        System.out.println("Sessions in redrawSessionsList: " + sessionsOnSheet);
         if ((sessionsOnSheet == null || sessionsOnSheet.isEmpty())) {
             return;
-//        } else if ((sessionsOnSheet == null || sessionsOnSheet.isEmpty()) && !exercisesInRoutine.isEmpty()) {
-//            sessionsOnSheet = new ArrayList<>();
-//            sessionsOnSheet.addAll(exercisesInRoutine);
-//        } else if (sessionsOnSheet != null && !sessionsOnSheet.containsAll(exercisesInRoutine)) {
-//            for (Exercise newExercise : exercisesInRoutine) {
-//                if (!sessionsOnSheet.contains(newExercise)) {
-//                    sessionsOnSheet.add(newExercise);
-//                }
-//            }
         }
-//        System.out.println("Exercises after adding possible new ones: " + sessionsOnSheet);
         this.sessionNodes.getChildren().clear();
         
         sessionsOnSheet.forEach(session -> {
@@ -338,8 +318,6 @@ public class WorkoutUI extends Application {
     }
     
     public void listSessionsView(Routine routine, Stage primaryStage) {
-        System.out.println("Starting listSessionsView");
-        
         ScrollPane workoutScrollbar = new ScrollPane();       
         BorderPane mainPane = new BorderPane(workoutScrollbar);
         this.sessionsScene = new Scene(mainPane, 800, 500);
@@ -367,11 +345,14 @@ public class WorkoutUI extends Application {
         });
         
         Label createSessionLabel = new Label();
+        Label sessionTimeLabel = new Label("Session date ('yyyy-mm-dd')");
+        TextField sessionTimeInput = new TextField();
+        VBox labelAndForm = new VBox(5);
         HBox addNewSessionForm = new HBox(10);
-        addNewSessionForm.setPadding(new Insets(10));
+        labelAndForm.setPadding(new Insets(10));
         Button createSessionButton = new Button("Add a new session");
         createSessionButton.setPadding(new Insets(10));
-
+        
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
        
@@ -380,15 +361,28 @@ public class WorkoutUI extends Application {
         this.sessionNodes.setMinWidth(780);
         this.sessionNodes.setPadding(new Insets(10));
         redrawSessionsList(routine, primaryStage);
-        
-        addNewSessionForm.getChildren().addAll(createSessionLabel, spacer, createSessionButton);
 
+        mainPane.setTop(menuPane);
+        addNewSessionForm.getChildren().addAll(sessionTimeLabel, sessionTimeInput, spacer, createSessionButton);
+        labelAndForm.getChildren().addAll(createSessionLabel, addNewSessionForm);
+        
         workoutScrollbar.setContent(this.sessionNodes);
-        mainPane.setBottom(addNewSessionForm);
+        mainPane.setBottom(labelAndForm);
         mainPane.setTop(menuPane);
         
         createSessionButton.setOnAction(e -> {
-            primaryStage.setScene(this.addSessionScene);
+            String timesString = sessionTimeInput.getText();
+            WorkoutSession newSession = this.workoutService.createWorkoutSession(timesString, routine);
+            if (newSession != null) {
+                createSessionLabel.setText("");
+                sessionTimeInput.setText("");
+                this.addSessionView(routine, newSession, primaryStage);
+                this.redrawAddDoneExerciseList(routine, newSession);
+                primaryStage.setScene(this.addSessionScene);
+            } else {
+                createSessionLabel.setText("Not a valid date");
+                createSessionLabel.setTextFill(Color.RED);
+            }
         });
         
     }
@@ -398,7 +392,6 @@ public class WorkoutUI extends Application {
         Label exerciseName  = new Label(exercise.getName());
         exerciseName.setMinHeight(28);
         exerciseName.setWrapText(true);
-        System.out.println("DoneExercise in oneDoneExerciseNode: " + exercise.getName());
 
         Label firstParameter  = new Label(exercise.getParameters().get(0));
         firstParameter.setMinHeight(28);
@@ -431,20 +424,9 @@ public class WorkoutUI extends Application {
         List<DoneExercise> sessionContents = session.getSessionContents();
         List<Exercise> exercisesInRoutine = routine.getExercises();
 
-        System.out.println("DoneExercises in redrawDoneExerciseList: " + sessionContents);
         if ((sessionContents == null || sessionContents.isEmpty()) || (exercisesInRoutine == null || exercisesInRoutine.isEmpty())) {
             return;
-//        } else if ((sessionsOnSheet == null || sessionsOnSheet.isEmpty()) && !exercisesInRoutine.isEmpty()) {
-//            sessionsOnSheet = new ArrayList<>();
-//            sessionsOnSheet.addAll(exercisesInRoutine);
-//        } else if (sessionsOnSheet != null && !sessionsOnSheet.containsAll(exercisesInRoutine)) {
-//            for (Exercise newExercise : exercisesInRoutine) {
-//                if (!sessionsOnSheet.contains(newExercise)) {
-//                    sessionsOnSheet.add(newExercise);
-//                }
-//            }
         }
-//        System.out.println("Exercises after adding possible new ones: " + sessionsOnSheet);
         this.doneExerciseNodes.getChildren().clear();
         
         for (int i = 0; i < exercisesInRoutine.size(); i++) {
@@ -453,17 +435,15 @@ public class WorkoutUI extends Application {
     }
     
     public void listDoneExercisesView(Routine routine, WorkoutSession session, Stage primaryStage) {
-        System.out.println("Starting listDoneExercisesView");
-        
         ScrollPane workoutScrollbar = new ScrollPane();       
         BorderPane mainPane = new BorderPane(workoutScrollbar);
         this.oneSessionScene = new Scene(mainPane, 800, 500);
                 
         HBox menuPane = new HBox(10);
         menuPane.setPadding(new Insets(10));
-        Label routineNameLabel = new Label(routine.getName());
+        Label routineNameLabel = new Label(routine.getName() + ": " + this.workoutService.dateToString(session.getDate()));
         VBox menuLabelAndRoutineLabel = new VBox(2);
-        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel,routineNameLabel);
+        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel, routineNameLabel);
         Region menuSpacer = new Region();
         HBox.setHgrow(menuSpacer, Priority.ALWAYS);
         Button logoutButton = new Button("Logout");
@@ -482,8 +462,11 @@ public class WorkoutUI extends Application {
         });
         
         Label createSessionLabel = new Label();
+        Label sessionTimeLabel = new Label("Session date ('yyyy-mm-dd')");
+        TextField sessionTimeInput = new TextField();
+        VBox labelAndForm = new VBox(5);
         HBox addNewSessionForm = new HBox(10);
-        addNewSessionForm.setPadding(new Insets(10));
+        labelAndForm.setPadding(new Insets(10));
         Button createSessionButton = new Button("Add a new session");
         createSessionButton.setPadding(new Insets(10));
 
@@ -496,16 +479,149 @@ public class WorkoutUI extends Application {
         this.doneExerciseNodes.setPadding(new Insets(10));
         redrawDoneExerciseList(routine, session, primaryStage);
         
-        addNewSessionForm.getChildren().addAll(createSessionLabel, spacer, createSessionButton);
-
+        addNewSessionForm.getChildren().addAll(sessionTimeLabel, sessionTimeInput, spacer, createSessionButton);
+        labelAndForm.getChildren().addAll(createSessionLabel, addNewSessionForm);
+        
         workoutScrollbar.setContent(this.doneExerciseNodes);
-        mainPane.setBottom(addNewSessionForm);
+        mainPane.setBottom(labelAndForm);
         mainPane.setTop(menuPane);
         
         createSessionButton.setOnAction(e -> {
-            primaryStage.setScene(this.addSessionScene);
+            String timeString = sessionTimeInput.getText();
+
+            WorkoutSession newSession = this.workoutService.createWorkoutSession(timeString, routine);
+            if (newSession != null) {
+                this.addSessionView(routine, newSession, primaryStage);
+                this.redrawAddDoneExerciseList(routine, newSession);
+                primaryStage.setScene(this.addSessionScene);
+            } else {
+                createSessionLabel.setText("Not a valid date");
+                createSessionLabel.setTextFill(Color.RED);
+            }
+        });
+    }
+    
+    public Node addDoneExerciseNode(Exercise exercise, WorkoutSession session) {     
+        VBox box = new VBox(2);
+        Label createDoneExerciseMessage = new Label();
+        HBox addDoneExerciseForm = new HBox(10);
+        Label exerciseName  = new Label(exercise.getName());
+        exerciseName.setMinHeight(28);
+        exerciseName.setWrapText(true);
+         
+        Label firstParameter  = new Label(exercise.getParameters().get(0));
+        firstParameter.setMinHeight(28);
+        firstParameter.setWrapText(true);
+
+        TextField firstParameterInput = new TextField();
+
+        Label secondParameter  = new Label(exercise.getParameters().get(1));
+        secondParameter.setMinHeight(28);
+        secondParameter.setWrapText(true);
+
+        TextField secondParameterInput = new TextField();
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        box.setPadding(new Insets(0,5,0,5));
+        
+        Button addDoneExerciseButton = new Button("Add");
+        addDoneExerciseButton.setPadding(new Insets(10));
+
+        addDoneExerciseForm.getChildren().addAll(exerciseName, spacer, firstParameter, firstParameterInput, secondParameter, secondParameterInput, addDoneExerciseButton);
+        box.getChildren().addAll(createDoneExerciseMessage, addDoneExerciseForm);
+        
+        addDoneExerciseButton.setOnAction(e -> {
+            String firstParameterValue = firstParameterInput.getText();
+            String secondParameterValue = secondParameterInput.getText();
+            
+            if(this.workoutService.addDoneExerciseToSession(session, exercise, firstParameterValue, secondParameterValue)) {
+                createDoneExerciseMessage.setText("The values has been added to the workout session");
+                createDoneExerciseMessage.setTextFill(Color.GREEN);
+            } else {
+                createDoneExerciseMessage.setText("Please add values as real numbers");
+                createDoneExerciseMessage.setTextFill(Color.RED);
+            }
         });
         
+        return box;
+    }
+    
+    public void redrawAddDoneExerciseList(Routine routine, WorkoutSession session) {
+        if (this.workoutService.getLoggedUser() == null) {
+            return;
+        }
+        List<Exercise> exercisesOnSheet = this.workoutService.getExercisesOfRoutine(routine);
+
+        List<Exercise> exercisesInRoutine = routine.getExercises();
+
+        if ((exercisesOnSheet == null || exercisesOnSheet.isEmpty()) && exercisesInRoutine.isEmpty()) {
+            return;
+        } else if ((exercisesOnSheet == null || exercisesOnSheet.isEmpty()) && !exercisesInRoutine.isEmpty()) {
+            exercisesOnSheet = new ArrayList<>();
+            exercisesOnSheet.addAll(exercisesInRoutine);
+        } else if (exercisesOnSheet != null && !exercisesOnSheet.containsAll(exercisesInRoutine)) {
+            for (Exercise newExercise : exercisesInRoutine) {
+                if (!exercisesOnSheet.contains(newExercise)) {
+                    exercisesOnSheet.add(newExercise);
+                }
+            }
+        }
+        this.addSessionContentNodes.getChildren().clear();
+        
+        exercisesOnSheet.forEach(exercise -> {
+            this.addSessionContentNodes.getChildren().add(addDoneExerciseNode(exercise, session));
+        });
+    }
+    
+    public void addSessionView(Routine routine, WorkoutSession session, Stage primaryStage) {        
+        ScrollPane workoutScrollbar = new ScrollPane();       
+        BorderPane mainPane = new BorderPane(workoutScrollbar);
+        this.addSessionScene = new Scene(mainPane, 800, 500);
+                
+        HBox menuPane = new HBox(10);
+        menuPane.setPadding(new Insets(10));
+        Label routineNameLabel = new Label(routine.getName() + ": " + this.workoutService.dateToString(session.getDate()));
+        VBox menuLabelAndRoutineLabel = new VBox(2);
+        menuLabelAndRoutineLabel.getChildren().addAll(menuLabel,routineNameLabel);
+        Region menuSpacer = new Region();
+        HBox.setHgrow(menuSpacer, Priority.ALWAYS);
+        Button logoutButton = new Button("Logout");
+        logoutButton.setPadding(new Insets(10));
+        Button saveButton = new Button("Save");
+        saveButton.setPadding(new Insets(10));
+        Button backButton = new Button("Back");
+        backButton.setPadding(new Insets(10));
+        menuPane.getChildren().addAll(menuLabelAndRoutineLabel, menuSpacer, logoutButton, backButton, saveButton);
+        
+        logoutButton.setOnAction(e -> {
+            this.workoutService.logout();
+            primaryStage.setScene(this.loginScene);
+        });
+        saveButton.setOnAction(e -> {
+            this.workoutService.workoutSessionToSheet(session, this.workoutService.getLoggedUser().getSpreadsheetId());
+        });
+        backButton.setOnAction(e -> {
+            this.workoutService.workoutSessionToSheet(session, this.workoutService.getLoggedUser().getSpreadsheetId());
+            primaryStage.setScene(this.sessionsScene);
+            redrawSessionsList(routine, primaryStage);
+        });
+        
+//        HBox labelBox = new HBox(10);
+//        labelBox.setPadding(new Insets(10));
+//        Label exerciseCreationMessage = new Label();
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+       
+        this.addSessionContentNodes = new VBox(10);
+        this.addSessionContentNodes.setMaxWidth(780);
+        this.addSessionContentNodes.setMinWidth(780);
+        this.addSessionContentNodes.setPadding(new Insets(10));
+        redrawAddDoneExerciseList(routine, session);
+        
+        workoutScrollbar.setContent(this.addSessionContentNodes);
+        mainPane.setTop(menuPane);
     }
     
     @Override
@@ -617,8 +733,9 @@ public class WorkoutUI extends Application {
         createRoutineButton.setPadding(new Insets(10));
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
+        Label newRoutineInputLabel = new Label("Name your new exercise routine: ");
         TextField newRoutineInput = new TextField();
-        createRoutineForm.getChildren().addAll(newRoutineInput, spacer, createRoutineButton);
+        createRoutineForm.getChildren().addAll(newRoutineInputLabel, newRoutineInput, spacer, createRoutineButton);
         
         this.routineNodes = new VBox(10);
         this.routineNodes.setMaxWidth(780);
@@ -643,13 +760,11 @@ public class WorkoutUI extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> {
             System.out.println("closing");
-            System.out.println(this.workoutService.getLoggedUser());
         });
     }
 
     @Override
     public void stop() {
-      // tee lopetustoimenpiteet täällä
       System.out.println("the program is closing");
     }    
     

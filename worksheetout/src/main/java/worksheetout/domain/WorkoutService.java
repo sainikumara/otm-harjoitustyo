@@ -1,21 +1,11 @@
 package worksheetout.domain;
 
-import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.model.AppendValuesResponse;
-import com.google.api.services.sheets.v4.model.ValueRange;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import worksheetout.dao.RoutineDao;
 import worksheetout.dao.SheetRoutineDao;
-import worksheetout.dao.SheetsServiceUtil;
-import worksheetout.dao.WorkoutSessionDao;
 import worksheetout.dao.SheetWorkoutSessionDao;
 import worksheetout.dao.UserDao;
-import worksheetout.domain.Routine;
 
 /**
  * The class responsible for the logic of the application
@@ -42,9 +32,7 @@ public class WorkoutService {
     public void routineToSheet(Routine routine, String spreadsheetId) {
         try {
             this.routineDao.save(routine, spreadsheetId);
-            System.out.println("\nRoutine " + routine.getName() + " has been saved on the spreadsheet with the id: " + spreadsheetId + "\n");
         } catch (Exception e) {
-            System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
         }
     }
     
@@ -52,8 +40,6 @@ public class WorkoutService {
         if (exercise == null) {
             return false;
         }
-        
-        System.out.println("Trying to add exercise " + exercise.getName() + " to routine " + routine.getName());
         try {
             routine.addOneExercise(exercise);
         } catch (Exception e) {
@@ -98,10 +84,8 @@ public class WorkoutService {
     public List<Routine> getRoutines() {
         List<Routine> routines = new ArrayList<>();
         try {
-            System.out.println("SpreadsheetId: " + this.loggedIn.getSpreadsheetId());
             routines = this.routineDao.getRoutines(this.loggedIn.getSpreadsheetId());
         } catch (Exception e) {
-            System.out.println("Exception in WorkoutService.getRoutines: " + e);
         }
 
         return routines;
@@ -116,9 +100,30 @@ public class WorkoutService {
     public void workoutSessionToSheet(WorkoutSession session, String spreadsheetId) {
         try {
             this.workoutSessionDao.save(session, spreadsheetId);
-            System.out.println("\nYour session has been saved on the spreadsheet with the id: " + spreadsheetId + "\n");
         } catch (Exception e) {
-            System.out.println("\nCould not save to Sheets. Error message: " + e + "\n");
+        }
+    }
+    
+    public boolean addDoneExerciseToSession(WorkoutSession session, Exercise exercise, String firstParameterValue, String secondParameterValue) {
+        List<Double> parameterValues = new ArrayList<>();
+        try {
+            parameterValues.add(Double.parseDouble(firstParameterValue));
+            parameterValues.add(Double.parseDouble(secondParameterValue));
+        } catch (Exception e) {
+            return false;
+        }
+        session.addOneDoneExercise(exercise.getName(), parameterValues);
+        return true;
+    }
+    
+    public WorkoutSession createWorkoutSession(String dateAsString, Routine routine) {
+        Date date = null;
+        try {
+            date = this.stringToDate(dateAsString);
+            WorkoutSession session = new WorkoutSession(date, routine);
+            return session;
+        } catch (Exception e) {
+            return null;
         }
     }
     
@@ -129,12 +134,15 @@ public class WorkoutService {
         } catch (Exception e) {
             return null;
         }
-        System.out.println("Sessions in getWorkoutSessions: " + sessions);
         return sessions;
     }
     
     public String dateToString(Date date) {
         return this.workoutSessionDao.parseDateToString(date);
+    }
+    
+    public Date stringToDate(String dateAsString) {
+        return this.workoutSessionDao.parseStringToDate(dateAsString);
     }
 
     /**

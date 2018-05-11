@@ -4,9 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A class representing an individual workout session that follows a workout routine
@@ -48,15 +46,12 @@ public class WorkoutSession {
     public List<String> getDateAndExerciseParameterValues() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String sessionDate = dateFormat.format(this.date);
-        
         List<String> values = new ArrayList<>();
         values.add(sessionDate);
-        
         for (DoneExercise exercise : this.sessionContents) {
             values.add(Double.toString(exercise.getParameterValue(exercise.getParameters().get(0))));
             values.add(Double.toString(exercise.getParameterValue(exercise.getParameters().get(1))));
         }
-        
         return values;
     }
     

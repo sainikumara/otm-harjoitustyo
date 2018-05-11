@@ -45,13 +45,13 @@ public class DoneExerciseTest {
     
     @Test
     public void getParameterValueWorks() {
-        assertEquals(70.0, doneExercise.getParameterValue("kg"));
+        assertTrue(70.0 == doneExercise.getParameterValue("kg"));
     }
     
     @Test
     public void setParameterValueWorks() {
         doneExercise.setParameterValue("repetitions", 40.0);
-        assertEquals(40.0, doneExercise.getParameterValue("repetitions"));
+        assertTrue(40.0 == doneExercise.getParameterValue("repetitions"));
     }
     
     @Test
